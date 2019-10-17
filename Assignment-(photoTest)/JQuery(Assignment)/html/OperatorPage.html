@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../jslib/jquery-1.11.1.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <script>
+    var getName;
+    function deleteForm(){
+      $('#getName').modal('toggle');
+      $("#editRest").remove();
+    }
+    function editUpdate(){
+        document.getElementById("editName").disabled = false;
+          document.getElementById("editBranches").disabled = false;
+          document.getElementById("openDate").disabled = false;
+          document.getElementById("address").disabled = false;
+          document.getElementById("editPhone").disabled = false;
+          document.getElementById("dishes").disabled = false;
+          document.getElementById("restType").disabled = false;
+          document.getElementById("uploadPhoto").disabled = false;
+          document.getElementById('btnUpdate').style.visibility = 'hidden';
+          document.getElementById('saveRest').style.visibility = 'visible';
+          document.getElementById('edMenu').style.visibility = 'hidden';
+      }
+        function updateSave() {
+          document.getElementById("editName").disabled = true;
+          document.getElementById("editBranches").disabled = true;
+          document.getElementById("openDate").disabled = true;
+          document.getElementById("address").disabled = true;
+          document.getElementById("editPhone").disabled = true;
+          document.getElementById("dishes").disabled = true;
+          document.getElementById("restType").disabled = true;
+          document.getElementById("uploadPhoto").disabled = true;
+          document.getElementById('addMenu1').style.visibility = 'visible';
+          document.getElementById('btnUpdate').style.visibility = 'visible';
+          document.getElementById('saveRest').style.visibility = 'hidden';
+          document.getElementById('edMenu').style.visibility = 'visible';
+        }
+    $(document).ready(function () {
+      var row = 0;
+      var cal=0;
+      $.getJSON('restData.json', function (tb) {
+        var showTb = "";
+        var count = 0;      
+        for (i = 0; i <= tb.restaurantName.length - 1; i++) {
+          var rest = tb.restaurantName[i];         
+          $("#table").append(""+
+            "<a data-toggle='modal' id='editRest1' data-target='#" +
+            tb.restaurantName[i] + "'><img src='../photo/"+tb.uploadPhoto[i]+"' style='width: 100px; height:100px;' hspace='20'></a>" +
+            "<div class='modal fade' id='" + tb.restaurantName[i] +
+            "' role='dialog'><div class='modal-dialog modal-lg'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'>&times;</button>" +
+            "<h2 class='modal-title'>Edit Restaurant </h2></div>" +
+            "<div class='modal-body'><form class='form-horizontal' id='editRestaurant'><div class='form-group' align='center'><div class='col-sm-10' align='center'><button type='button' class='btn btn-primary' style='width: 45%;' id='Update' onclick='' >Update</button>" +
+            "<button type='button' class='btn btn-danger' style='width: 45%;' onclick='deleteForm()' data-dismiss='modal'>Delete</button>" +
+            "</div></div><hr/>" +
+            "<div class='form-group'><label class='control-label col-sm-2' >Restaurant Name:</label><div class='col-sm-10'>" +
+            "<input type='text' class='form-control' style='width:50%;' id='editN' placeholder='Enter Name' value='"+tb.restaurantName[i]+"' disabled></div></div><hr/>" +
+            "<div class='form-group'><label class='control-label col-sm-2' for='branches'>Branches:</label><div class='col-sm-10'>" +
+            "<select class='form-control' id='editBr' style='width:45%;' value='"+tb.branches[i]+"' disabled><option>Mount Davis</option><option>Kennedy Town</option>" +
+            "<option>Pok Fu Lam</option><option>Western District</option><option>Mid Levels</option><option>Peak</option><option>Sai Ying Pun</option><option>Central</option><option>Wan Chai</option>" +
+            "<option>Happy Valley</option><option>Causeway Bay</option><option>North Point</option><option>Quarry Bay</option><option>Sau Kei Wan</option>" +
+            "<option>Chai Wan</option><option>Stonecutters Island</option><option>Lai Chi Kok</option><option>Cheung Sha Wan</option><option>North Cheung Sha Wan</option>" +
+            "<option>Sham Shui Po</option><option>Mong Kok</option><option>Shek Kip Mei</option><option>Yau Ma Tei</option><option>Tsim Sha Tsui</option>" +
+            "<option>King's Park</option><option>Ho Man Tin</option><option>Kowloon Tong</option><option>Hung Hom</option><option>Ma Tau Kok</option>" +
+            "<option>Wong Tai Sin</option><option>Kowloon City</option><option>Hong Kong Airport (Kai Tak)</option><option>San Po Kong</option><option>Jordan Valley</option>" +
+            "<option>Ngau Tau Kok</option><option>Kwun Tong</option><option>Yau Tong</option><option>Lei Yue Mun</option><option>Diamond Hill (Area)</option>" +
+            "<option>Ngau Chi Wan (Area)</option><option>Lung Cheung Road (Area)</option><option>Tsuen Wan</option><option>Sha Tin</option><option>Tai Po</option>" +
+            "<option>Tuen Mun</option><option>Sai Kung</option><option>Sheung Shui</option><option>Fan Ling</option><option>Sha Tau Kok</option>" +
+            "<option>Ta Kwu Ling</option></select></div></div><hr/>" +
+            "<div class='form-group'><label class='control-label col-sm-2' >Open Date:</label><div class='col-sm-10'><textarea class='form-control' rows='5' id='Date' placeholder='Enter Open Date'  disabled>"+tb.openDate[i]+"</textarea></div></div><hr/>" +
+            "<div class='form-group'><label class='control-label col-sm-2' for='address'>Address:</label><div class='col-sm-10'><textarea class='form-control' rows='5' id='editAddress' placeholder='Enter Address' disabled>"+tb.address[i]+"</textarea></div></div><hr/>" +
+            "<div class='form-group'><label class='control-label col-sm-2' for='address'>Telephone:</label><div class='col-sm-10'><input type='text' class='form-control' style='width:50%;' id='Phone' placeholder='Enter Telephone Number' value='"+tb.telephone[i]+"' disabled></div></div><hr/>" +
+            "<div class='form-group'><label class='control-label col-sm-2' for='address'>Dishes:</label><div class='col-sm-10'><select class='form-control' id='dish' style='width:45%;' value='"+tb.dishes[i]+"' disabled>" +
+            "<option>Vietnam</option><option>Serbia</option><option>Jordan</option><option>Mexico</option><option>Italy</option>" +
+            "<option>Hong Kong Style</option><option>Mexico</option><option>Taiwan</option><option>Montenegro</option><option>Nicaragua</option>" +
+            "<option>Burma (Myanmar)</option><option>France</option><option>El Salvador</option><option>Greece</option><option>United States of America</option>" +
+            "<option>Kosovo</option><option>Thailand</option><option>Georgia</option><option>Ethiopia</option><option>Armenia</option>" +
+            "<option>Costa Rica</option><option>Romania</option><option>Philippines</option><option>Belize</option><option>Singapore</option>" +
+            "<option>Israel</option><option>Panama</option><option>Japan</option><option>Laos</option><option>Hungary</option>" +
+            "<option>South Korea</option><option>The Seychelles</option><option>Cyprus</option><option>Luxembourg</option><option>Canada</option>" +
+            "<option>Tanzania</option><option>Iceland</option><option>Jamaica</option><option>Slovakia</option><option>Norway</option>" +
+            "<option>Portugal</option><option>Spain</option><option>Belgium</option><option>Czech Republic</option><option>Austria</option>" +
+            "<option>Guatemala</option></select></div></div><hr/>" +
+            "<div class='form-group'><label class='control-label col-sm-2' for='address'>Food/ Restaurant Type:</label><div class='col-sm-10'><select class='form-control' id='type' style='width:45%;' value='"+tb.type[i]+"' disabled>" +
+            "<option>Tea Restaurant</option><option>Food Stall Noodles</option><option>Dai Pai Dong</option><option>Noodles/Rice Noodles</option><option>Congee</option>" +
+            "<option>Wonton/Dumpling</option><option>Fast Food</option><option>Cooked Food Center</option><option>Snack Shop & Deli</option></select>" +
+            "</div></div><hr/><div class='form-group'><label class='control-label col-sm-2' for='address'>Upload Photo:</label><input type='file' name='pic'  accept='image/*' id='Photo' value='"+tb.uploadPhoto[i]+"' disabled/>" +
+            "</div><hr/><div class='form-group'><button type='button' class='btn btn-success' data-toggle='modal' style='width:45%;' data-target='#editMenu'>Edit Menu</button>" +
+            "</div>" +
+            "<button type='button' class='btn btn-success' id='save' width='45%' style='visibility: hidden;' onclick='updateSave()'>Save</button></div></form></div>" +
+            "</div></div></t>"
+            
+            );
+            
+            cal+=1;
+        }
+        $("#addMenu").click(function(){
+          $("#menuTable").append("<tr id="+row+"><td><input type='text'></td><td><select><option>special</option><option>temporary</option><option>seasonal</option></select></td><td><input id='date' type='text' placefolder='dd-mm-yyyy'> to <input id='date2' type='text' placefolder='dd-mm-yyyy'></td><td><input type='text'></td><td><input type='checkbox' value='hide'>Hidden</td><td><button id='deleteMenu'>Delete Menu</button></td></tr>");
+          row = row + 1;
+        });
+        $("#menuTable").on('click', '#deleteMenu', function () {
+          $(this).closest('tr').remove();
+        });  
+      });     
+      $("#addButton").click(function () {
+        //set the src not = "/C:fakepath"
+        var getPhoto = $('#uploadPho').val().replace(/C:\\fakepath\\/i, '');
+
+        var branches=$("#branches").val();
+        var date = $("#date").val();
+        var address = $("#inAddress").val();
+        var phone = $("#phone").val();
+        var dishes = $("#sel1").val();
+        var type = $("#type").val();
+        //var photo = $("#uploadPhoto").val();
+            getName = $("#name").val();
+
+//if img src cannot show inage, put "../photo/"
+$("#table").append(
+          "<a data-toggle='modal' id='editRest' data-target='#" +
+            getName + "'><img src='"+getPhoto+"' style='width: 100px; height:100px;' alt='"+getPhoto+"'></a></t>"
+          +"<div class='modal fade' id='"+getName+"' role='dialog'><div class='modal-dialog modal-lg'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'>&times;</button>" +
+          "<h2 class='modal-title'>Edit Restaurant </h2></div>" +
+          "<div class='modal-body'><form class='form-horizontal' id='editRestaurant'><div class='form-group' align='center'><div class='col-sm-10' align='center'><button type='button' class='btn btn-primary' style='width: 45%;' id='btnUpdate' onclick='editUpdate()' >Update</button>" +
+          "<button type='button' class='btn btn-danger' style='width: 45%;' onclick='deleteForm()' data-dismiss='modal'>Delete</button>" +
+          "</div></div><hr/>" +
+          "<div class='form-group'><label class='control-label col-sm-2' >Restaurant Name:</label><div class='col-sm-10'>" +
+          "<input type='text' class='form-control' style='width:50%;' id='editName' placeholder='Enter Name'  disabled='disabled' value='"+getName+"'></div></div><hr/>" +
+          "<div class='form-group'><label class='control-label col-sm-2' for='branches'>Branches:</label><div class='col-sm-10'>" +
+          "<select class='form-control' id='editBranches' style='width:45%;' disabled='disabled' value='"+branches+"'><option value='Mount Davis'>Mount Davis</option value='Kennedy Town'><option>Kennedy Town</option>" +
+          "<option value='Pok Fu Lam'>Pok Fu Lam</option><option value='Western District'>Western District</option><option value='Mid Levels'>Mid Levels</option><option value='Peak'>Peak</option><option value='Sai Ying Pun'>Sai Ying Pun</option><option value='Central'>Central</option><option value='Wan Chai'>Wan Chai</option>" +
+          "<option value='Happy Valley'>Happy Valley</option><option value='Causeway Bay'>Causeway Bay</option><option value='North Point'>North Point</option><option value='Quarry Bay'>Quarry Bay</option><option value='Sau Kei Wan'>Sau Kei Wan</option>" +
+          "<option value='Chai Wan'>Chai Wan</option><option value='Stonecutters Island'>Stonecutters Island</option><option  value='Lai Chi Kok'>Lai Chi Kok</option><option value='Cheung Sha Wan'>Cheung Sha Wan</option><option value='North Cheung Sha Wan'>North Cheung Sha Wan</option>" +
+          "<option value='Sham Shui Po'>Sham Shui Po</option><option value='Mong Kok'>Mong Kok</option><option value='Shek Kip Mei'>Shek Kip Mei</option><option value='Yau Ma Tei'>Yau Ma Tei</option><option value='Tsim Sha Tsui'>Tsim Sha Tsui</option>" +
+          "<option value='King's Park'>King's Park</option><option value='Ho Man Tin'>Ho Man Tin</option><option value='Kowloon Tong'>Kowloon Tong</option><option value='Hung Hom'>Hung Hom</option><option value='Ma Tau Kok'>Ma Tau Kok</option>" +
+          "<option value='Wong Tai Sin'>Wong Tai Sin</option><option value='Kowloon City'>Kowloon City</option><option value='Hong Kong Airport (Kai Tak)'>Hong Kong Airport (Kai Tak)</option><option value='San Po Kong'>San Po Kong</option><option value='Jordan Valley'>Jordan Valley</option>" +
+          "<option value='Ngau Tau Kok'>Ngau Tau Kok</option><option value='Kwun Tong'>Kwun Tong</option><option value='Yau Tong'>Yau Tong</option><option value='Lei Yue Mun'>Lei Yue Mun</option><option value='Diamond Hill (Area)'>Diamond Hill (Area)</option>" +
+          "<option value='Ngau Chi Wan (Area)'>Ngau Chi Wan (Area)</option><option value='Lung Cheung Road (Area)'>Lung Cheung Road (Area)</option><option value='Tsuen Wan'>Tsuen Wan</option><option value='Sha Tin'>Sha Tin</option><option value='Tai Po'>Tai Po</option>" +
+          "<option value='Tuen Mun'>Tuen Mun</option><option value='Sai Kung'>Sai Kung</option><option value='Sai KungSheung Shui'>Sheung Shui</option><option value='Fan Ling'>Fan Ling</option><option value='Sha Tau Kok'>Sha Tau Kok</option>" +
+          "<option value='Ta Kwu Ling'>Ta Kwu Ling</option></select></div></div><hr/>" +
+          "<div class='form-group'><label class='control-label col-sm-2' >Open Date:</label><div class='col-sm-10'><textarea class='form-control' rows='5' id='openDate' placeholder='Enter Open Date'   disabled='disabled'>"+date+"</textarea></div></div><hr/>" +
+          "<div class='form-group'><label class='control-label col-sm-2' for='address'>Address:</label><div class='col-sm-10'><textarea class='form-control' rows='5' id='address' placeholder='Enter Address'  disabled='disabled' >"+address+"</textarea></div></div><hr/>" +
+          "<div class='form-group'><label class='control-label col-sm-2' for='tel'>Telephone:</label><div class='col-sm-10'><input type='text' class='form-control' style='width:50%;' id='editPhone' placeholder='Enter Telephone Number' value='"+phone+"' disabled='disabled'></div></div><hr/>" +
+          "<div class='form-group'><label class='control-label col-sm-2' for='dish'>Dishes:</label><div class='col-sm-10'><select class='form-control' id='dishes' style='width:45%;' value='"+dishes+"' disabled='disabled' >" +
+          "<option value='Vietnam'>Vietnam</option><option value='Serbia'>Serbia</option><option value='Jordan'>Jordan</option><option value='Mexico'>Mexico</option><option value='Italy'>Italy</option>" +
+          "<option value='Hong Kong Style'>Hong Kong Style</option><option value='Mexico'>Mexico</option><option value='Taiwan'>Taiwan</option><option value='Montenegro'>Montenegro</option><option value='Nicaragua'>Nicaragua</option>" +
+          "<option value='Burma (Myanmar)'>Burma (Myanmar)</option><option value='France'>France</option><option value='El Salvador'>El Salvador</option><option value='Greece'>Greece</option><option value='United States of America'>United States of America</option>" +
+          "<option value='Kosovo'>Kosovo</option><option value='Thailand'>Thailand</option><option value='Georgia'>Georgia</option><option  value='Ethiopia'>Ethiopia</option><option value='Armenia'>Armenia</option>" +
+          "<option>Costa Rica</option><option>Romania</option><option>Philippines</option><option>Belize</option><option>Singapore</option>" +
+          "<option>Israel</option><option>Panama</option><option>Japan</option><option>Laos</option><option>Hungary</option>" +
+          "<option>South Korea</option><option>The Seychelles</option><option>Cyprus</option><option>Luxembourg</option><option>Canada</option>" +
+          "<option>Tanzania</option><option>Iceland</option><option>Jamaica</option><option>Slovakia</option><option>Norway</option>" +
+          "<option>Portugal</option><option>Spain</option><option>Belgium</option><option>Czech Republic</option><option>Austria</option>" +
+          "<option>Guatemala</option></select></div></div><hr/>" +
+          "<div class='form-group'><label class='control-label col-sm-2' for='type'>Food/ Restaurant Type:</label><div class='col-sm-10'><select class='form-control' id='restType' style='width:45%;' value='"+type+"' disabled='disabled'>" +
+          "<option value='Tea Restaurant'>Tea Restaurant</option><option value='Food Stall Noodles'>Food Stall Noodles</option><option value='Dai Pai Dong'>Dai Pai Dong</option><option value='Noodles/Rice Noodles'>Noodles/Rice Noodles</option><option value='Congee'>Congee</option>" +
+          "<option value='Wonton/Dumpling'>Wonton/Dumpling</option><option value='Fast Food'>Fast Food</option><option value='Cooked Food Center'>Cooked Food Center</option><option value='Snack Shop & Deli'>Snack Shop & Deli</option></select>" +
+          "</div></div><hr/><div class='form-group'><label class='control-label col-sm-2' for='photo'>Upload Photo:</label><input type='file' name='pic'  accept='image/*' id='uploadPhoto' value='"+getPhoto+"' disabled='disabled' />" +
+          "</div><hr/><div class='form-group'><button type='button' class='btn btn-success' data-toggle='modal' style='width:45%;' id='edMenu' data-target='#editMenu1'>Edit Menu</button>" +
+          "<div class='modal fade' id='editMenu1'><div class='modal-dialog modal-lg' style='width:80%'><div class='modal-content'><div class='modal-header'><h4 class='modal-title'>Edit Menu</h4>" +
+          "<button type='button' class='close' data-dismiss='modal'>&times;</button></div><div class='modal-body'><button type='button' id='addMenu1' >Add Menu</button>" +
+          "<hr/><table id='menuTable1' width='100%' border='1'><tr><th>Name</th><th>Type</th><th>Date</th><th>$</th><th>Status</th><th>Option</th></tr></table></div>" +
+          "<div class='modal-footer'><button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button></div></div></div></div>" +
+          "<button type='button' class='btn btn-success' id='saveRest' width='45%' style='visibility: hidden;' onclick='updateSave()'>Save</button></div></form></div>" +
+          "</div></div>"
+          );
+          $("#addMenu1").click(function(){
+          $("#menuTable1").append("<tr id="+row+"><td><input type='text'></td><td><select><option>special</option><option>temporary</option><option>seasonal</option></select></td><td><input id='date' type='text' placefolder='dd-mm-yyyy'> to <input id='date2' type='text' placefolder='dd-mm-yyyy'></td><td><input type='text'></td><td><input type='checkbox' value='hide'>Hidden</td><td><button id='deleteMenu1'>Delete Menu</button></td></tr>");
+          row = row + 1;
+        });
+        $("#menuTable1").on('click', '#deleteMenu1', function () {
+          $(this).closest('tr').remove();
+        }); 
+    });
+});
+  </script>
+</head>
+<body>
+  <div class="background">
+    <ul>
+      <li><a class="active" href="#home">Home</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <div style="margin-left:25%;padding:1px 16px;height:auto;">
+      <div class="login" align="right">
+        <button class="button" style="vertical-align:middle" data-toggle="modal" data-target="#login"><span>Login
+          </span></button>
+      </div>
+      <!-- The Modal -->
+      <div class="modal fade" id="login">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h1 class="modal-title">Yummy Everywhere</h1>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+              
+              <form action="upload.php" class="needs-validation" method="POST" novalidate>
+                <div class="form-group">
+                  <label for="uname">Username:</label>
+                  <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+
+                </div>
+                <div class="form-group">
+                  <label for="pwd">Password:</label>
+                  <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd"
+                    required>
+
+                </div>
+                <div class="form-group form-check">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="remember" required> Remember me
+
+                  </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-danger">Clear</button>
+              </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="table" align="center">
+        <div id="table">
+          <!-- Trigger the modal with a button -->
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addRest">Add Restaurant</button></p>
+          <div id="showRest"></div>
+</div>
+          <!-- Modal -->
+          <div class="modal fade" id="addRest" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h2 class="modal-title">Add Restaurant </h2>
+                </div>
+                <div class="modal-body">
+                  <form class="form-horizontal" id="addRestaurant">
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">Restaurant Name:</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" style="width:50%;" id="name" placeholder="Enter Name">
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="branches">Branches:</label>
+                      <div class="col-sm-10">
+
+                        <select class="form-control" id="branches" style="width:45%;">
+                          <option value= "Mount Davis">Mount Davis</option>
+                          <option value= "Kennedy Town">Kennedy Town</option>
+                          <option value= "Pok Fu Lam">Pok Fu Lam</option>
+                          <option value= "Western District">Western District</option>
+                          <option value= "Mid Levels">Mid Levels</option>
+                          <option value= "Peak">Peak</option>
+                          <option value= "Sai Ying Pun">Sai Ying Pun</option>
+                          <option value= "Central">Central</option>
+                          <option value= "Wan Chai">Wan Chai</option>
+                          <option value= "Happy Valley">Happy Valley</option>
+                          <option value= "Causeway Bay">Causeway Bay</option>
+                          <option value= "North Point">North Point</option>
+                          <option value= "Quarry Bay">Quarry Bay</option>
+                          <option value= "Sau Kei Wan">Sau Kei Wan</option>
+                          <option value= "Chai Wan">Chai Wan</option>
+                          <option value= "Stonecutters Island">Stonecutters Island</option>
+                          <option value= "Lai Chi Kok">Lai Chi Kok</option>
+                          <option value= "Cheung Sha Wan">Cheung Sha Wan</option>
+                          <option value= "North Cheung Sha Wan">North Cheung Sha Wan</option>
+                          <option value= "Sham Shui Po">Sham Shui Po</option>
+                          <option value= "Mong Kok">Mong Kok</option>
+                          <option value= "Shek Kip Mei">Shek Kip Mei</option>
+                          <option value= "Yau Ma Tei">Yau Ma Tei</option>
+                          <option value= "Tsim Sha Tsui">Tsim Sha Tsui</option>
+                          <option value= "King's Park">King's Park</option>
+                          <option value= "Ho Man Tin">Ho Man Tin</option>
+                          <option value= "Kowloon Tong">Kowloon Tong</option>
+                          <option value= "Hung Hom">Hung Hom</option>
+                          <option value= "Ma Tau Kok">Ma Tau Kok</option>
+                          <option value= "Wong Tai Sin">Wong Tai Sin</option>
+                          <option value= "Kowloon City">Kowloon City</option>
+                          <option value= "Hong Kong Airport (Kai Tak)">Hong Kong Airport (Kai Tak)</option>
+                          <option value= "San Po Kong">San Po Kong</option>
+                          <option value= "Jordan Valley">Jordan Valley</option>
+                          <option value= "Ngau Tau Kok">Ngau Tau Kok</option>
+                          <option value= "Kwun Tong">Kwun Tong</option>
+                          <option value= "Yau Tong">Yau Tong</option>
+                          <option value= "Lei Yue Mun">Lei Yue Mun</option>
+                          <option value= "Diamond Hill (Area)">Diamond Hill (Area)</option>
+                          <option value= "Ngau Chi Wan (Area)">Ngau Chi Wan (Area)</option>
+                          <option value= "Lung Cheung Road (Area)">Lung Cheung Road (Area)</option>
+                          <option value= "Tsuen Wan">Tsuen Wan</option>
+                          <option value= "Sha Tin">Sha Tin</option>
+                          <option value= "Tai Po">Tai Po</option>
+                          <option value= "Tuen Mun">Tuen Mun</option>
+                          <option value= "Sai Kung">Sai Kung</option>
+                          <option value= "Sheung Shui">Sheung Shui</option>
+                          <option value= "Fan Ling">Fan Ling</option>
+                          <option value= "Sha Tau Kok">Sha Tau Kok</option>
+                          <option value= "Ta Kwu Ling">Ta Kwu Ling</option>
+                        </select>
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">Open Date:</label>
+                      <div class="col-sm-10">
+                        <textarea class="form-control" rows="5" id="date" placeholder="Enter Open Date"></textarea>
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="address">Address:</label>
+                      <div class="col-sm-10">
+                        <textarea class="form-control" rows="5" id="inAddress" placeholder="Enter Address"></textarea>
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="phone">Telephone:</label>
+                      <div class="col-sm-10">
+
+                        <input type="text" class="form-control" style="width:50%;" id="phone"
+                          placeholder="Enter Telephone Number">
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="dish">Dishes:</label>
+                      <div class="col-sm-10">
+
+                        <select class="form-control" id="sel1" style="width:45%;">
+                          <option value= "Vietnam">Vietnam</option>
+                          <option value= "Serbia">Serbia</option>
+                          <option value= "Jordan">Jordan</option>
+                          <option value= "Mexico">Mexico</option>
+                          <option value= "Italy">Italy</option>
+                          <option value= "Hong Kong Style">Hong Kong Style</option>
+                          <option value= "Mexico">Mexico</option>
+                          <option value= "Taiwan">Taiwan</option>
+                          <option value= "Montenegro">Montenegro</option>
+                          <option value= "Nicaragua">Nicaragua</option>
+                          <option value= "Burma (Myanmar)">Burma (Myanmar)</option>
+                          <option value= "France">France</option>
+                          <option value= "El Salvador">El Salvador</option>
+                          <option value= "Greece">Greece</option>
+                          <option value= "United States of America">United States of America</option>
+                          <option value= "Kosovo">Kosovo</option>
+                          <option value= "Thailand">Thailand</option>
+                          <option value= "Georgia">Georgia</option>
+                          <option value= "Ethiopia">Ethiopia</option>
+                          <option value= "Armenia">Armenia</option>
+                          <option value= "Costa Rica">Costa Rica</option>
+                          <option value= "Romania">Romania</option>
+                          <option value= "Philippines">Philippines</option>
+                          <option value= "Belize">Belize</option>
+                          <option value= "Singapore">Singapore</option>
+                          <option value= "Israel">Israel</option>
+                          <option value= "Panama">Panama</option>
+                          <option value= "Japan">Japan</option>
+                          <option value= "Laos">Laos</option>
+                          <option value= "Hungary">Hungary</option>
+                          <option value= "South Korea">South Korea</option>
+                          <option value= "The Seychelles">The Seychelles</option>
+                          <option value= "Cyprus">Cyprus</option>
+                          <option value= "Luxembourg">Luxembourg</option>
+                          <option value= "Canada">Canada</option>
+                          <option value= "Tanzania">Tanzania</option>
+                          <option value= "Iceland">Iceland</option>
+                          <option value= "Jamaica">Jamaica</option>
+                          <option value= "Slovakia">Slovakia</option>
+                          <option value= "Norway">Norway</option>
+                          <option value= "Portugal">Portugal</option>
+                          <option value= "Spain">Spain</option>
+                          <option value= "Belgium">Belgium</option>
+                          <option value= "Czech Republic">Czech Republic</option>
+                          <option value= "Austria">Austria</option>
+                          <option value= "Guatemala">Guatemala</option>
+                        </select>
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="type">Food/ Restaurant Type:</label>
+                      <div class="col-sm-10">
+                        <select class="form-control" id="type" style="width:45%;">
+                          <option value= "Tea Restaurant">Tea Restaurant</option>
+                          <option value= "Food Stall Noodles">Food Stall Noodles</option>
+                          <option value= "Dai Pai Dong">Dai Pai Dong</option>
+                          <option value= "Noodles/Rice Noodles">Noodles/Rice Noodles</option>
+                          <option value= "Congee">Congee</option>
+                          <option value= "Wonton/Dumpling">Wonton/Dumpling</option>
+                          <option value= "Fast Food">Fast Food</option>
+                          <option value= "Cooked Food Center">Cooked Food Center</option>
+                          <option value= "Snack Shop & Deli">Snack Shop & Deli</option>
+                        </select>
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="photo">Upload Photo:</label>
+                      <input type="file" name="pic" accept="image/*" id="uploadPho">
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                      <button type="button" class="btn btn-success" style="width:45%;" id="addButton"
+                        data-dismiss="modal">Add Restaurant</button>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <table id="myTable" border="1">
+        </table>
+        <div class='modal fade' id='editMenu'><div class='modal-dialog modal-lg' style='width:80%'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <h4 class='modal-title'>Edit Menu</h4>
+          <button type='button' class='close' data-dismiss='modal'>&times;</button>
+        </div>
+        <div class='modal-body'>
+          <button type='button' id='addMenu' >Add Menu</button>
+          <hr/>
+          <table id='menuTable' width='100%' border='1'>
+            <tr><th>Name</th><th>Type</th><th>Date</th><th>$</th><th>Status</th><th>Option</th></tr>
+          </table>
+        </div>
+          <div class='modal-footer'><button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button></div></div></div>
+      </div>
+   </div>
+   </div>
+   </body>
+</html>
