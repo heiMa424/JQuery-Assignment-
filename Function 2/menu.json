@@ -1,0 +1,42 @@
+{
+	"name": "mcdonald",
+	"lunchmenu": [{
+			"name": "Hamburger",
+			"price": "13",
+			"sub": null
+		},
+		{
+			"name": "Big Mac",
+			"price": "25",
+			"sub": null
+		},
+		{
+			"name": "French Fries",
+			"price": "10",
+			"sub": null
+		}
+	],
+	"breakfastmenu": [{
+			"name": "Hash Brown",
+			"price": "12",
+			"sub": null
+		},
+		{
+			"name": "Pancakes",
+			"price": "22",
+			"sub": null
+		}
+	],
+	"drinkmenu": [{
+			"name": "Coke",
+			"price": "10",
+			"sub": null
+		},
+		{
+			"name": "Orange Juice",
+			"price": "8",
+			"sub": null
+		}
+	]
+
+}

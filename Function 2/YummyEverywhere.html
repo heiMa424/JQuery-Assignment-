@@ -56,28 +56,43 @@
     </script>
     <script>
         $(document).ready(function () {
-            $('#mcd').click(function() {
+            $('#mcd').click(function () {
                 $('#mcdm').modal('show');
             });
 
-            $('#kfc').click(function() {
+            $('#kfc').click(function () {
                 $('#kfcm').modal('show');
             });
 
-            $('#stb').click(function() {
+            $('#stb').click(function () {
                 $('#stbm').modal('show');
             });
 
-            $('#pzh').click(function() {
+            $('#pzh').click(function () {
                 $('#pzhm').modal('show');
             });
 
-            $('#dry').click(function() {
+            $('#dry').click(function () {
                 $('#drym').modal('show');
             });
 
-            $('.login').click(function() {
+            $('.login').click(function () {
                 $('#loginm').modal('show');
+            });
+
+            $.ajax({
+                type: 'GET',
+                url: "menu.json",
+                data: "data",
+                async: true,
+                dataType: 'json',
+                success: function (data) {
+                   
+                    console.log(data.name );
+                    for ($i = 0; $i<data.lunchmenu.length; $i++) {
+                    $("#mcdmenu").append("<p>" + data.lunchmenu[$i].name + data.lunchmenu[$i].price+ "</p>");
+                    }
+                }
             });
         });
     </script>
@@ -131,11 +146,15 @@
             <h2>Explore Our Selection</h2>
         </div>
         <div class="row">
-            <div class=icon><img id="mcd" src="img/mcdonalds.png" class="rounded-circle" height="100px" width="100px" /></div>
+            <div class=icon><img id="mcd" src="img/mcdonalds.png" class="rounded-circle" height="100px" width="100px" />
+            </div>
             <div class=icon><img id="kfc" src="img/kfc.png" class="rounded-circle" height="100px" width="100px" /></div>
-            <div class=icon><img id="stb" src="img/starbucks.png" class="rounded-circle" height="100px" width="100px" /></div>
-            <div class=icon><img id="pzh" src="img/pizzahut.png" class="rounded-circle" height="100px" width="100px" /></div>
-            <div class=icon><img id="dry" src="img/danryans.jpg" class="rounded-circle" height="100px" width="100px" /></div>
+            <div class=icon><img id="stb" src="img/starbucks.png" class="rounded-circle" height="100px" width="100px" />
+            </div>
+            <div class=icon><img id="pzh" src="img/pizzahut.png" class="rounded-circle" height="100px" width="100px" />
+            </div>
+            <div class=icon><img id="dry" src="img/danryans.jpg" class="rounded-circle" height="100px" width="100px" />
+            </div>
         </div>
 
 
@@ -157,35 +176,40 @@
                 <h3><img src="img/mcdonalds.png" height="60px" width="60px" /> Mcdonalds</h3>
                 Cuisine: Western, Fast Food<br />
                 Location: Shatin Galleria<br />
-                <button type="button" id="mcdb" class="btn btn-success" data-toggle="modal" data-target="#mcdm">View the Menu</button>
+                <button type="button" id="mcdb" class="btn btn-success" data-toggle="modal" data-target="#mcdm">View the
+                    Menu</button>
             </div>
 
             <div class="jumbotron">
                 <h3><img src="img/kfc.png" height="60px" width="60px" /> KFC</h3>
                 Cuisine: Western, Fast Food<br />
                 Location: Shatin Galleria<br />
-                <button type="button" id="kfcb" class="btn btn-success" data-toggle="modal" data-target="#kfcm">View the Menu</button>
+                <button type="button" id="kfcb" class="btn btn-success" data-toggle="modal" data-target="#kfcm">View the
+                    Menu</button>
             </div>
 
             <div class="jumbotron">
                 <h3><img src="img/starbucks.png" height="60px" width="60px" /> Starbucks</h3>
                 Cuisine: Coffee<br />
                 Location: Shatin Galleria<br />
-                <button type="button" id="stbb" class="btn btn-success" data-toggle="modal" data-target="#stbm">View the Menu</button>
+                <button type="button" id="stbb" class="btn btn-success" data-toggle="modal" data-target="#stbm">View the
+                    Menu</button>
             </div>
 
             <div class="jumbotron">
                 <h3><img src="img/pizzahut.png" height="60px" width="60px" /> Pizza Hut</h3>
                 Cuisine: Western, Pizza<br />
                 Location: New Town Plaza<br />
-                <button type="button" id="pzhb" class="btn btn-success" data-toggle="modal" data-target="#pzhm">View the Menu</button>
+                <button type="button" id="pzhb" class="btn btn-success" data-toggle="modal" data-target="#pzhm">View the
+                    Menu</button>
             </div>
 
             <div class="jumbotron">
                 <h3><img src="img/danryans.jpg" height="60px" width="60px" /> Dan Ryans</h3>
                 Cuisine: Western<br />
                 Location: Festival Walk<br />
-                <button type="button" id="dryb" class="btn btn-success" data-toggle="modal" data-target="#drym">View the Menu</button>
+                <button type="button" id="dryb" class="btn btn-success" data-toggle="modal" data-target="#drym">View the
+                    Menu</button>
             </div>
         </div>
     </div>
@@ -196,7 +220,7 @@
         <a class="login">Reserve</a>
     </div>
 
-    
+
     <div class="modal fade" id="mcdm">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -208,8 +232,8 @@
                 </div>
 
                 <!-- Modal body -->
-                <div class="modal-body">
-                    Modal body..
+                <div class="modal-body" id="mcdmenu">
+
                 </div>
 
                 <!-- Modal footer -->
