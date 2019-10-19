@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script>
+        //search function below
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                // $("#finder *").filter(function() {
+                //   $p = $(this).parent().text().toLowerCase().indexOf(value) > -1
+                //   $(this).toggle($p);
+                // });
+                $('div.jumbotron').each(function () {
+                    var $this = $(this);
+                    if ($this.text().toLowerCase().indexOf(value) === -1)
+                        $this.closest('div.jumbotron').fadeOut();
+                    else $this.closest('div.jumbotron').fadeIn();
+                });
+            });
+        });
+    </script>
+
+    <script>
+        // Add smooth scrolling to all links
+        $(document).ready(function () {
+            $("a").on('click', function (event) {
+
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+                    // Prevent default anchor click behavior
+                    event.preventDefault();
+
+                    // Store hash
+                    var hash = this.hash;
+
+                    // Using jQuery's animate() method to add smooth page scroll
+                    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 800, function () {
+
+                        // Add hash (#) to URL when done scrolling (default click behavior)
+                        window.location.hash = hash;
+                    });
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#mcd').click(function() {
+                $('#mcdm').modal('show');
+            });
+
+            $('#kfc').click(function() {
+                $('#kfcm').modal('show');
+            });
+
+            $('#stb').click(function() {
+                $('#stbm').modal('show');
+            });
+
+            $('#pzh').click(function() {
+                $('#pzhm').modal('show');
+            });
+
+            $('#dry').click(function() {
+                $('#drym').modal('show');
+            });
+
+            $('.login').click(function() {
+                $('#loginm').modal('show');
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container-fluid" id="home">
+        <div class=image><img src="img/header2.jpg" alt=""></div>
+    </div>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <p>Haven't decided what to eat? Come</p>
+                </div>
+                <div class="col-4">
+                    <p>Have a specific cuisine/place in mind? Try</p>
+                </div>
+                <div class="col-4">
+                    <p>I know exactly what I want, Let me</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <h1><a href="#explore">Explore</a></h1>
+                </div>
+                <div class="col-4">
+                    <h1><a href="#find">Find</a></h1>
+                </div>
+                <div class="col-4">
+                    <h1><a class="login">Reserve</a></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <h1>Yummy Everywhere</h1>
+        <p>"all the foods, all day, everyday"</p>
+    </div>
+    <div class="container-fluid second">
+        <div class="row">
+            <div class="col-6"></div>
+            <div class="col-3"></div>
+            <div class="col-2"></div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="explore">
+        <div class="row">
+            <h2>Explore Our Selection</h2>
+        </div>
+        <div class="row">
+            <div class=icon><img id="mcd" src="img/mcdonalds.png" class="rounded-circle" height="100px" width="100px" /></div>
+            <div class=icon><img id="kfc" src="img/kfc.png" class="rounded-circle" height="100px" width="100px" /></div>
+            <div class=icon><img id="stb" src="img/starbucks.png" class="rounded-circle" height="100px" width="100px" /></div>
+            <div class=icon><img id="pzh" src="img/pizzahut.png" class="rounded-circle" height="100px" width="100px" /></div>
+            <div class=icon><img id="dry" src="img/danryans.jpg" class="rounded-circle" height="100px" width="100px" /></div>
+        </div>
+
+
+    </div>
+
+    <div class="container-fluid">
+        <div class="container">
+        </div>
+    </div>
+
+    <div class="container-fluid" id="find">
+        <div class="row">
+            <h2>Find A Restaurant</h2>
+
+        </div>
+        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+        <div id="finder">
+            <div class="jumbotron">
+                <h3><img src="img/mcdonalds.png" height="60px" width="60px" /> Mcdonalds</h3>
+                Cuisine: Western, Fast Food<br />
+                Location: Shatin Galleria<br />
+                <button type="button" id="mcdb" class="btn btn-success" data-toggle="modal" data-target="#mcdm">View the Menu</button>
+            </div>
+
+            <div class="jumbotron">
+                <h3><img src="img/kfc.png" height="60px" width="60px" /> KFC</h3>
+                Cuisine: Western, Fast Food<br />
+                Location: Shatin Galleria<br />
+                <button type="button" id="kfcb" class="btn btn-success" data-toggle="modal" data-target="#kfcm">View the Menu</button>
+            </div>
+
+            <div class="jumbotron">
+                <h3><img src="img/starbucks.png" height="60px" width="60px" /> Starbucks</h3>
+                Cuisine: Coffee<br />
+                Location: Shatin Galleria<br />
+                <button type="button" id="stbb" class="btn btn-success" data-toggle="modal" data-target="#stbm">View the Menu</button>
+            </div>
+
+            <div class="jumbotron">
+                <h3><img src="img/pizzahut.png" height="60px" width="60px" /> Pizza Hut</h3>
+                Cuisine: Western, Pizza<br />
+                Location: New Town Plaza<br />
+                <button type="button" id="pzhb" class="btn btn-success" data-toggle="modal" data-target="#pzhm">View the Menu</button>
+            </div>
+
+            <div class="jumbotron">
+                <h3><img src="img/danryans.jpg" height="60px" width="60px" /> Dan Ryans</h3>
+                Cuisine: Western<br />
+                Location: Festival Walk<br />
+                <button type="button" id="dryb" class="btn btn-success" data-toggle="modal" data-target="#drym">View the Menu</button>
+            </div>
+        </div>
+    </div>
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#explore">Explore</a>
+        <a href="#find">Find</a>
+        <a class="login">Reserve</a>
+    </div>
+
+    
+    <div class="modal fade" id="mcdm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">McDonalds Menu</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Modal body..
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="kfcm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">KFC Menu</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Modal body..
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="stbm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Starbucks Menu</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Modal body..
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="pzhm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Pizza Hut Menu</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Modal body..
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="drym">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Dan Ryan's Menu</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Modal body..
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="loginm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h1 class="modal-title">Yummy Everywhere</h1>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+
+                    <form action="upload.php" class="needs-validation" method="POST" novalidate>
+                        <div class="form-group">
+                            <label for="uname">Username:</label>
+                            <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname"
+                                required>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Password:</label>
+                            <input type="password" class="form-control" id="pwd" placeholder="Enter password"
+                                name="pswd" required>
+
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="remember" required> Remember me
+
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-danger">Clear</button>
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
