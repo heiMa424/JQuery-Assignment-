@@ -1,36 +1,42 @@
-body {
-    font-family: 'Montserrat', sans-serif;
+body,html {
+    font-family: 'Julius Sans One', sans-serif;
     background: #222;
     padding: 0;
     margin-top: 0;
     margin-right: 0;
-    overflow:hidden;
+    overflow-x:hidden;
 }
 
 .modal-open, body {overflow: inherit !important;}
 
+.modal-open a {
+    color:#222;
+    padding: 30px;
+}
+
+.modal-open a:hover {
+    color:red;
+}
+
 /* The navigation bar */
 .navbar {
   overflow: hidden;
-  background-color: #ccc;
+  /* background-color: transparent; */
+  background:rgba(255,255,255,0.5);
   position: fixed; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
-  width: 100%; /* Full width */
+  /* Full width */
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
 
 /* Links inside the navbar */
 .navbar a {
   /* float: left; */
   /* display: block; */
-  color: inherit;
+  color: #222;
   /* text-align: left; */
-  /* padding: 14px 16px;
-  text-decoration: none; */
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 /* Change background on mouse-over */

@@ -57,6 +57,7 @@
     </script>
     <script>
         $(document).ready(function () {
+            //link to modal for explore icons
             $('#mcd').click(function () {
                 $('#mcdm').modal('show');
             });
@@ -80,7 +81,7 @@
             $('.login').click(function () {
                 $('#loginm').modal('show');
             });
-
+            // get json for mcd menu
             $.ajax({
                 type: 'GET',
                 url: "menu.json",
@@ -88,27 +89,92 @@
                 async: true,
                 dataType: 'json',
                 success: function (data) {
-                   
-                    console.log(data.name );
-                    $("#mcdmenu").append("<div style='text-align:left;'> Lunch <span style='float:right;'>Price</span></div>");
-                    $("#mcdmenu").append("<div style='border: thin solid lightgray; width: 100%;''></div>");
+
+                    console.log(data.name);
+                    $("#mcdmenu").append(
+                        "<div style='text-align:left;'> Lunch <span style='float:right;'>Price</span></div>"
+                        );
+                    $("#mcdmenu").append(
+                        "<div style='border: thin solid lightgray; width: 100%;''></div>");
                     $("#mcdmenu").append();
-                    for ($i = 0; $i<data.lunchmenu.length; $i++) {
-                    $("#mcdmenu").append("<div style='text-align:left;'> " +data.lunchmenu[$i].name + "<span style='float:right;'>$ " +data.lunchmenu[$i].price + "</span></div>");
+                    for ($i = 0; $i < data.lunchmenu.length; $i++) {
+                        $("#mcdmenu").append("<div style='text-align:left;'> " + data.lunchmenu[$i]
+                            .name + "<span style='float:right;'>$ " + data.lunchmenu[$i].price +
+                            "</span></div>");
                     }
                     $("#mcdmenu").append("<br/>Breakfast <br/>");
-                    $("#mcdmenu").append("<div style='border: thin solid lightgray; width: 100%;''></div>");
-                    for ($i = 0; $i<data.breakfastmenu.length; $i++) {
-                    $("#mcdmenu").append("<div style='text-align:left;'> " +data.breakfastmenu[$i].name + "<span style='float:right;'>$ " +data.breakfastmenu[$i].price + "</span></div>");
+                    $("#mcdmenu").append(
+                        "<div style='border: thin solid lightgray; width: 100%;''></div>");
+                    for ($i = 0; $i < data.breakfastmenu.length; $i++) {
+                        $("#mcdmenu").append("<div style='text-align:left;'> " + data.breakfastmenu[
+                            $i].name + "<span style='float:right;'>$ " + data.breakfastmenu[
+                            $i].price + "</span></div>");
                     }
                     $("#mcdmenu").append("<br/>Drinks <br/>");
-                    $("#mcdmenu").append("<div style='border: thin solid lightgray; width: 100%;''></div>");
-                    for ($i = 0; $i<data.drinkmenu.length; $i++) {
-                    $("#mcdmenu").append("<div style='text-align:left;'> " +data.drinkmenu[$i].name + "<span style='float:right;'>$ " +data.drinkmenu[$i].price + "</span></div>");
+                    $("#mcdmenu").append(
+                        "<div style='border: thin solid lightgray; width: 100%;''></div>");
+                    for ($i = 0; $i < data.drinkmenu.length; $i++) {
+                        $("#mcdmenu").append("<div style='text-align:left;'> " + data.drinkmenu[$i]
+                            .name + "<span style='float:right;'>$ " + data.drinkmenu[$i].price +
+                            "</span></div>");
                     }
                 }
             });
         });
+
+        $(document).ready(function(){
+        
+            var initialLike = parseInt($("#mcdlb").text())
+            var initialDislike = parseInt($("#mcddlb").text())
+
+            $("#mcdl").click(function() {
+                if (parseInt($("#mcdlb").text()) == initialLike &&
+                parseInt($("#mcddlb").text()) == initialDislike) {
+                    $("#mcdlb").text(parseInt($("#mcdlb").text()) + 1);
+                    $("#mcdl").attr('style', 'background-color:lightgreen');
+                } // cancel if click again
+                else if (parseInt($("#mcdlb").text()) > initialLike &&
+                parseInt($("#mcddlb").text()) == initialDislike) {
+                    $("#mcdlb").text(parseInt($("#mcdlb").text()) - 1);
+                    $("#mcdl").attr('style', 'background-color:#28a745');
+                }
+                //remove the dislike before adding to like
+                else if (parseInt($("#mcddlb").text()) > initialDislike ) {
+                    $("#mcddlb").text(parseInt($("#mcddlb").text()) - 1);
+                    $("#mcdlb").text(parseInt($("#mcdlb").text()) + 1);   
+                    $("#mcddl").attr('style', 'background-color:#dc3545');
+                    $("#mcdl").attr('style', 'background-color:lightgreen');                
+                }
+                //update bars
+                var likePercent = 100* parseInt($("#mcdlb").text()) / (parseInt($("#mcdlb").text()) + parseInt($("#mcddlb").text()));
+                var dislikePercent = 100* parseInt($("#mcddlb").text()) / (parseInt($("#mcdlb").text()) + parseInt($("#mcddlb").text()));
+                $("#mcdlb").attr('style',  'width:'+likePercent+'%');
+                $("#mcddlb").attr('style',  'width:'+dislikePercent+'%');
+            })
+
+            $("#mcddl").click(function() {
+                if (parseInt($("#mcddlb").text()) == initialDislike &&
+                parseInt($("#mcdlb").text()) == initialLike) {
+                    $("#mcddlb").text(parseInt($("#mcddlb").text()) + 1);
+                    $("#mcddl").attr('style', 'background-color:pink');
+                }//cancel if click again
+                else if (parseInt($("#mcddlb").text()) > initialDislike &&
+                parseInt($("#mcdlb").text()) == initialLike) {
+                    $("#mcddlb").text(parseInt($("#mcddlb").text()) - 1);
+                    $("#mcddl").attr('style', 'background-color:#dc3545');
+                }//remove the like before adding to dislike
+                else if (parseInt($("#mcdlb").text()) > initialLike) {
+                    $("#mcdlb").text(parseInt($("#mcdlb").text()) - 1);
+                    $("#mcddlb").text(parseInt($("#mcddlb").text()) + 1); 
+                    $("#mcdl").attr('style', 'background-color:#28a745');     
+                    $("#mcddl").attr('style', 'background-color:pink');              
+                }
+                var likePercent = 100* parseInt($("#mcdlb").text()) / (parseInt($("#mcdlb").text()) + parseInt($("#mcddlb").text()));
+                var dislikePercent = 100* parseInt($("#mcddlb").text()) / (parseInt($("#mcdlb").text()) + parseInt($("#mcddlb").text()));
+                $("#mcdlb").attr('style',  'width:'+likePercent+'%');
+                $("#mcddlb").attr('style',  'width:'+dislikePercent+'%');
+            })
+        });  
     </script>
 </head>
 
@@ -190,31 +256,35 @@
                 <h3><img src="img/mcdonalds.png" height="60px" width="60px" /> Mcdonalds</h3>
                 Cuisine: Western, Fast Food<br />
                 <div class="progress">
-                        <div class="progress-bar bg-success" style="width:52%">
-                          104
-                        </div>
-                        <div class="progress-bar bg-danger" style="width:48%">
-                          96
-                        </div>
+                    <div id="mcdlb" class="progress-bar bg-success" style="width:52%">
+                        104
+                    </div>
+                    <div id="mcddlb" class="progress-bar bg-danger" style="width:48%">
+                        96
+                    </div>
                 </div>
                 <br />
-                <button type="button" id="mcdb" class="btn btn-info" data-toggle="modal" data-target="#mcdm">View the
+                <button type="button" id="mcdb" class="btn btn-info" data-toggle="modal" data-target="#mcdm" data-backdrop="static" data-keyboard="false">View the
                     Menu</button>
+                
+                <button type="button" id="mcdl" class="btn btn-success">Like</button>
+                <button type="button" id="mcddl" class="btn btn-danger">Dislike</button>
+                
             </div>
 
             <div class="jumbotron">
                 <h3><img src="img/kfc.png" height="60px" width="60px" /> KFC</h3>
                 Cuisine: Western, Fast Food<br />
                 <div class="progress">
-                        <div class="progress-bar bg-success" style="width:75%">
-                          150
-                        </div>
-                        <div class="progress-bar bg-danger" style="width:25%">
-                          50
-                        </div>
+                    <div class="progress-bar bg-success" style="width:75%">
+                        150
+                    </div>
+                    <div class="progress-bar bg-danger" style="width:25%">
+                        50
+                    </div>
                 </div>
                 <br />
-                <button type="button" id="kfcb" class="btn btn-info" data-toggle="modal" data-target="#kfcm">View the
+                <button type="button" id="kfcb" class="btn btn-success" data-toggle="modal" data-target="#kfcm">View the
                     Menu</button>
             </div>
 
@@ -222,28 +292,29 @@
                 <h3><img src="img/starbucks.png" height="60px" width="60px" /> Starbucks</h3>
                 Cuisine: Coffee<br />
                 <div class="progress">
-                        <div class="progress-bar bg-success" style="width:70%">
-                          7
-                        </div>
-                        <div class="progress-bar bg-danger" style="width:30%">
-                          3
-                        </div>
+                    <div class="progress-bar bg-success" style="width:70%">
+                        7
+                    </div>
+                    <div class="progress-bar bg-danger" style="width:30%">
+                        3
+                    </div>
                 </div>
                 <br />
                 <button type="button" id="stbb" class="btn btn-info" data-toggle="modal" data-target="#stbm">View the
                     Menu</button>
+
             </div>
 
             <div class="jumbotron">
                 <h3><img src="img/pizzahut.png" height="60px" width="60px" /> Pizza Hut</h3>
                 Cuisine: Western, Pizza<br />
                 <div class="progress">
-                        <div class="progress-bar bg-success" style="width:100%">
-                          100
-                        </div>
-                        <div class="progress-bar bg-danger" style="width:0%">
-                          0
-                        </div>
+                    <div class="progress-bar bg-success" style="width:100%">
+                        100
+                    </div>
+                    <div class="progress-bar bg-danger" style="width:0%">
+                        0
+                    </div>
                 </div>
                 <br />
                 <button type="button" id="pzhb" class="btn btn-info" data-toggle="modal" data-target="#pzhm">View the
@@ -254,12 +325,12 @@
                 <h3><img src="img/danryans.jpg" height="60px" width="60px" /> Dan Ryans</h3>
                 Cuisine: Western<br />
                 <div class="progress">
-                        <div class="progress-bar bg-success" style="width:55%">
-                          55
-                        </div>
-                        <div class="progress-bar bg-danger" style="width:45%">
-                          45
-                        </div>
+                    <div class="progress-bar bg-success" style="width:55%">
+                        55
+                    </div>
+                    <div class="progress-bar bg-danger" style="width:45%">
+                        45
+                    </div>
                 </div>
                 <br />
                 <button type="button" id="dryb" class="btn btn-info" data-toggle="modal" data-target="#drym">View the
@@ -292,33 +363,51 @@
                         <li><a href="#mcdmenupane" data-toggle="tab">Menu</a></li>
                         <li><a href="#mcdcomment" data-toggle="tab">Comments</a></li>
                     </ul>
-                    
+
                     <div class="tab-content">
                         <div class="tab-pane active" id="mcdinfo">
-                            <div class="jumbotron">An absolute classic in the field of fast food, come try our absolutely delicious Big Mac!<br/><br/>
-                                
-                            Location: Shatin Centre, 2-16 Wang Pok Street, Sha Tin<br />
-                            Website: mcdonalds.com.hk<br />
-                            Phone: 2603 4161<br />
-                            Open Now!<br/>
+                            <div class="jumbotron">An absolute classic in the field of fast food, come try our
+                                absolutely delicious Big Mac!<br /><br />
+
+                                Location: Shatin Centre, 2-16 Wang Pok Street, Sha Tin<br />
+                                Website: mcdonalds.com.hk<br />
+                                Phone: 2603 4161<br />
+                                Open Now!<br />
                             </div>
-                                
-                           <!-- <div class="control-group">
+
+                            <!-- <div class="control-group">
                                <label class="control-label">Instance Name</label>
                            </div> -->
                         </div>
-                    
+
                         <div class="tab-pane" id="mcdmenupane">
-                                <div class="jumbotron"  id="mcdmenu">
-                                    </div>
-                        </div> 
+                            <div class="jumbotron" id="mcdmenu">
+                            </div>
+                        </div>
                         <div class="tab-pane" id="mcdcomment">
-                                <div class="jumbotron">
-                                        User: Matthew <br />
-                                        Datetime: 2:15pm 16/10/2019<br />
-                                        Comment: Very Delicious!
-                                    </div>
-                        </div> 
+                            <br />
+
+                                <textarea cols="50" rows="4" id="comment"></textarea>
+                                <br />
+                                <input type="submit" id="commentb" class="btn-outline-success" value="Post Comment" />
+
+                            <br />
+                            <br />
+                            <script>
+                                $(document).ready(function() {
+                                    $("#commentb").click(function(){
+                                        $("#commentarea").append("<div class='jumbotron'>" +$("#comment").val()+"</div>");
+                                    })
+                                })
+                            </script>
+                            <div id="commentarea">
+                            <div class="jumbotron">
+                                User: Matthew <br />
+                                Datetime: 2:15pm 16/10/2019<br />
+                                Comment: Very Delicious!
+                            </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -441,7 +530,7 @@
                 <div class="modal-body">
 
 
-                    <!-- <form action="YummyLogin.html" class="needs-validation" method="POST" novalidate> -->
+                    <form action="YummyLogin.html" class="needs-validation" method="POST" novalidate>
                         <div class="form-group">
                             <label for="uname">Username:</label>
                             <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname"
@@ -460,9 +549,9 @@
 
                             </label>
                         </div>
-                        <a href="YummyLogin.html" style="padding:0px;" class="btn btn-primary">Submit</a>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                         <button type="reset" class="btn btn-danger">Clear</button>
-                    <!-- </form> -->
+                    </form>
                 </div>
 
                 <!-- Modal footer -->
@@ -474,7 +563,7 @@
         </div>
     </div>
 
-    
+
 </body>
 
 </html>
