@@ -57,6 +57,7 @@
     </script>
     <script>
         $(document).ready(function () {
+
             $('#mcd').click(function () {
                 $('#mcdm').modal('show');
             });
@@ -81,6 +82,20 @@
                 $('#loginm').modal('show');
             });
 
+            $('#login2').click(function () {
+                $("#regm").modal('hide');
+                $('#loginm').modal('show');
+            });
+
+            $('.reg').click(function () {
+                $('#regm').modal('show');
+            });
+
+            $('#reg2').click(function () {
+                $("#loginm").modal('hide');
+                $('#regm').modal('show');
+            });
+
             $.ajax({
                 type: 'GET',
                 url: "menu.json",
@@ -88,23 +103,34 @@
                 async: true,
                 dataType: 'json',
                 success: function (data) {
-                   
-                    console.log(data.name );
-                    $("#mcdmenu").append("<div style='text-align:left;'> Lunch <span style='float:right;'>Price</span></div>");
-                    $("#mcdmenu").append("<div style='border: thin solid lightgray; width: 100%;''></div>");
+
+                    console.log(data.name);
+                    $("#mcdmenu").append(
+                        "<div style='text-align:left;'> Lunch <span style='float:right;'>Price</span></div>"
+                        );
+                    $("#mcdmenu").append(
+                        "<div style='border: thin solid lightgray; width: 100%;''></div>");
                     $("#mcdmenu").append();
-                    for ($i = 0; $i<data.lunchmenu.length; $i++) {
-                    $("#mcdmenu").append("<div style='text-align:left;'> " +data.lunchmenu[$i].name + "<span style='float:right;'>$ " +data.lunchmenu[$i].price + "</span></div>");
+                    for ($i = 0; $i < data.lunchmenu.length; $i++) {
+                        $("#mcdmenu").append("<div style='text-align:left;'> " + data.lunchmenu[$i]
+                            .name + "<span style='float:right;'>$ " + data.lunchmenu[$i].price +
+                            "</span></div>");
                     }
                     $("#mcdmenu").append("<br/>Breakfast <br/>");
-                    $("#mcdmenu").append("<div style='border: thin solid lightgray; width: 100%;''></div>");
-                    for ($i = 0; $i<data.breakfastmenu.length; $i++) {
-                    $("#mcdmenu").append("<div style='text-align:left;'> " +data.breakfastmenu[$i].name + "<span style='float:right;'>$ " +data.breakfastmenu[$i].price + "</span></div>");
+                    $("#mcdmenu").append(
+                        "<div style='border: thin solid lightgray; width: 100%;''></div>");
+                    for ($i = 0; $i < data.breakfastmenu.length; $i++) {
+                        $("#mcdmenu").append("<div style='text-align:left;'> " + data.breakfastmenu[
+                            $i].name + "<span style='float:right;'>$ " + data.breakfastmenu[
+                            $i].price + "</span></div>");
                     }
                     $("#mcdmenu").append("<br/>Drinks <br/>");
-                    $("#mcdmenu").append("<div style='border: thin solid lightgray; width: 100%;''></div>");
-                    for ($i = 0; $i<data.drinkmenu.length; $i++) {
-                    $("#mcdmenu").append("<div style='text-align:left;'> " +data.drinkmenu[$i].name + "<span style='float:right;'>$ " +data.drinkmenu[$i].price + "</span></div>");
+                    $("#mcdmenu").append(
+                        "<div style='border: thin solid lightgray; width: 100%;''></div>");
+                    for ($i = 0; $i < data.drinkmenu.length; $i++) {
+                        $("#mcdmenu").append("<div style='text-align:left;'> " + data.drinkmenu[$i]
+                            .name + "<span style='float:right;'>$ " + data.drinkmenu[$i].price +
+                            "</span></div>");
                     }
                 }
             });
@@ -190,12 +216,12 @@
                 <h3><img src="img/mcdonalds.png" height="60px" width="60px" /> Mcdonalds</h3>
                 Cuisine: Western, Fast Food<br />
                 <div class="progress">
-                        <div class="progress-bar bg-success" style="width:52%">
-                          104
-                        </div>
-                        <div class="progress-bar bg-danger" style="width:48%">
-                          96
-                        </div>
+                    <div class="progress-bar bg-success" style="width:52%">
+                        104
+                    </div>
+                    <div class="progress-bar bg-danger" style="width:48%">
+                        96
+                    </div>
                 </div>
                 <br />
                 <button type="button" id="mcdb" class="btn btn-info" data-toggle="modal" data-target="#mcdm">View the
@@ -206,12 +232,12 @@
                 <h3><img src="img/kfc.png" height="60px" width="60px" /> KFC</h3>
                 Cuisine: Western, Fast Food<br />
                 <div class="progress">
-                        <div class="progress-bar bg-success" style="width:75%">
-                          150
-                        </div>
-                        <div class="progress-bar bg-danger" style="width:25%">
-                          50
-                        </div>
+                    <div class="progress-bar bg-success" style="width:75%">
+                        150
+                    </div>
+                    <div class="progress-bar bg-danger" style="width:25%">
+                        50
+                    </div>
                 </div>
                 <br />
                 <button type="button" id="kfcb" class="btn btn-info" data-toggle="modal" data-target="#kfcm">View the
@@ -222,12 +248,12 @@
                 <h3><img src="img/starbucks.png" height="60px" width="60px" /> Starbucks</h3>
                 Cuisine: Coffee<br />
                 <div class="progress">
-                        <div class="progress-bar bg-success" style="width:70%">
-                          7
-                        </div>
-                        <div class="progress-bar bg-danger" style="width:30%">
-                          3
-                        </div>
+                    <div class="progress-bar bg-success" style="width:70%">
+                        7
+                    </div>
+                    <div class="progress-bar bg-danger" style="width:30%">
+                        3
+                    </div>
                 </div>
                 <br />
                 <button type="button" id="stbb" class="btn btn-info" data-toggle="modal" data-target="#stbm">View the
@@ -238,12 +264,12 @@
                 <h3><img src="img/pizzahut.png" height="60px" width="60px" /> Pizza Hut</h3>
                 Cuisine: Western, Pizza<br />
                 <div class="progress">
-                        <div class="progress-bar bg-success" style="width:100%">
-                          100
-                        </div>
-                        <div class="progress-bar bg-danger" style="width:0%">
-                          0
-                        </div>
+                    <div class="progress-bar bg-success" style="width:100%">
+                        100
+                    </div>
+                    <div class="progress-bar bg-danger" style="width:0%">
+                        0
+                    </div>
                 </div>
                 <br />
                 <button type="button" id="pzhb" class="btn btn-info" data-toggle="modal" data-target="#pzhm">View the
@@ -254,12 +280,12 @@
                 <h3><img src="img/danryans.jpg" height="60px" width="60px" /> Dan Ryans</h3>
                 Cuisine: Western<br />
                 <div class="progress">
-                        <div class="progress-bar bg-success" style="width:55%">
-                          55
-                        </div>
-                        <div class="progress-bar bg-danger" style="width:45%">
-                          45
-                        </div>
+                    <div class="progress-bar bg-success" style="width:55%">
+                        55
+                    </div>
+                    <div class="progress-bar bg-danger" style="width:45%">
+                        45
+                    </div>
                 </div>
                 <br />
                 <button type="button" id="dryb" class="btn btn-info" data-toggle="modal" data-target="#drym">View the
@@ -272,6 +298,7 @@
         <a href="#explore">Explore</a>
         <a href="#find">Find</a>
         <a class="login" href="#">Reserve</a>
+        <a class="reg" href="#">Join Us</a>
     </div>
 
 
@@ -287,38 +314,92 @@
 
                 <!-- Modal body -->
                 <div class="modal-body" id="mcdmodal">
+                    <div class="form-group">
+                        <select class="form-control" id="sel1">
+                            <option selected="selected">Select Your Branch</option>
+                            <optgroup label="New Territories">
+                                <option>Shatin Centre, Shatin</option>
+                                <option>Lee On Estate, Ma On Shan</option>
+                            </optgroup>
+                            <optgroup label="Kowloon">
+                                <option> Kowloon City Plaza, Kowloon City</option>
+                                <option>Peking Road, Tsim Sha Tsui</option>
+                            </optgroup>
+                            <optgroup label="HK Island">
+                                <option>King's Road, North Point</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <script>
+                        $(document).ready(function () {
+                            $(".tab-content").hide();
+                            $("#sel1").change(function () {
+                                $(".tab-content").show();
+                            })
+                        })
+                    </script>
+
                     <ul class="nav nav-tabs" id="tabContent">
                         <li class="active"><a href="#mcdinfo" data-toggle="tab">About Us</a></li>
                         <li><a href="#mcdmenupane" data-toggle="tab">Menu</a></li>
                         <li><a href="#mcdcomment" data-toggle="tab">Comments</a></li>
                     </ul>
-                    
+
                     <div class="tab-content">
                         <div class="tab-pane active" id="mcdinfo">
-                            <div class="jumbotron">An absolute classic in the field of fast food, come try our absolutely delicious Big Mac!<br/><br/>
-                                
-                            Location: Shatin Centre, 2-16 Wang Pok Street, Sha Tin<br />
-                            Website: mcdonalds.com.hk<br />
-                            Phone: 2603 4161<br />
-                            Open Now!<br/>
+                            <br />
+                            <div class="jumbotron">An absolute classic in the field of fast food, come try our
+                                absolutely delicious Big Mac!<br /><br />
+
+                                <b>Location:</b> Shatin Centre, 2-16 Wang Pok Street, Sha Tin<br />
+                                <b>Website:</b> mcdonalds.com.hk<br />
+                                <b>Phone:</b> 2603 4161<br />
+                                <br />
+                                <b>Ongoing Promotions:</b> 10% Off Cheeseburgers! <br />
+                                <br />
+                                <b>Open Now!</b><br />
                             </div>
-                                
-                           <!-- <div class="control-group">
-                               <label class="control-label">Instance Name</label>
-                           </div> -->
+
+                            <!-- <div class="control-group">
+                                   <label class="control-label">Instance Name</label>
+                               </div> -->
                         </div>
-                    
+
                         <div class="tab-pane" id="mcdmenupane">
-                                <div class="jumbotron"  id="mcdmenu">
-                                    </div>
-                        </div> 
+                            <br />
+                            <div class="jumbotron" id="mcdmenu">
+
+                            </div>
+                        </div>
                         <div class="tab-pane" id="mcdcomment">
+                            <br />
+
+                            <textarea cols="50" rows="4" id="comment"></textarea>
+                            <br />
+                            <input type="submit" id="commentb" class="btn-outline-success" value="Post Comment" />
+
+                            <br />
+                            <br />
+                            <script>
+                                $(document).ready(function () {
+                                    $("#commentb").click(function () {
+                                        $datetime = moment().format('MMMM Do YYYY, h:mm:ss a');
+                                        $("#commentarea").append(
+                                            "<div class='jumbotron'><b>User:</b> Arthur <br /><b>Posted On:</b> " +
+                                            $datetime + "<br / ><b>Comment:</b> " + $("#comment")
+                                            .val() + "<br /></div>");
+                                    })
+                                })
+                            </script>
+                            <div id="commentarea">
                                 <div class="jumbotron">
-                                        User: Matthew <br />
-                                        Datetime: 2:15pm 16/10/2019<br />
-                                        Comment: Very Delicious!
-                                    </div>
-                        </div> 
+                                    <b>User:</b> Matthew <br />
+                                    <b>Posted On:</b> November 23rd 2019, 8:50:12 am<br />
+                                    <b>Comment:</b> Very Delicious!
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -330,6 +411,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="modal fade" id="kfcm">
         <div class="modal-dialog">
@@ -441,13 +523,13 @@
                 <div class="modal-body">
 
 
-                    <!-- <form action="YummyLogin.html" class="needs-validation" method="POST" novalidate> -->
+                    <form action="#" class="needs-validation" method="POST" novalidate>
                         <div class="form-group">
                             <label for="uname">Username:</label>
                             <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname"
                                 required>
-
                         </div>
+
                         <div class="form-group">
                             <label for="pwd">Password:</label>
                             <input type="password" class="form-control" id="pwd" placeholder="Enter password"
@@ -460,13 +542,17 @@
 
                             </label>
                         </div>
-                        <a href="YummyLogin.html" style="padding:0px;" class="btn btn-primary">Submit</a>
+                        <a href="YummyLogin.html" style="padding:7.5px; color:white" class="btn btn-primary">Submit</a>
                         <button type="reset" class="btn btn-danger">Clear</button>
-                    <!-- </form> -->
+                    </form>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
+
+                    <p class="mr-auto">Not a member? <a href="#" id="reg2">Join Us</a></p>
+
+
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
 
@@ -474,7 +560,89 @@
         </div>
     </div>
 
-    
+    <div class="modal fade" id="regm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h1 class="modal-title">Yummy Everywhere</h1>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="" class="needs-validation"
+                        oninput='pswd2.setCustomValidity(pswd2.value != pswd.value ? "Passwords do not match." : ""); pswd.setCustomValidity(pswd.value.length < 8 ? "Password has to be at least 8 characters long." :"")'>
+                        <div class="form-group">
+                            <label for="uname">Username:</label>
+                            <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Password:</label>
+                            <input type="password" class="form-control" id="pwd" placeholder="Enter password"
+                                name="pswd" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd2">Confirm Password:</label>
+                            <input type="password" class="form-control" id="pwd2" placeholder="Repeat password"
+                                name="pswd2" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address:</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email address"
+                                name="em" required>
+                        </div>
+                        <div class="form-group">
+                                <label for="phone">Phone Number:</label>
+                                <input type="text" class="form-control" id="phone" placeholder="Enter phone" name="ph"
+                                    required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</a>
+                            <button type="reset" class="btn btn-danger">Clear</button>
+
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <p class="mr-auto"> Already have an account? <a href="#" id="login2">Log In</a></p>
+
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+                <script>
+                    // Example starter JavaScript for disabling form submissions if there are invalid fields
+                    (function () {
+                        'use strict';
+                        window.addEventListener('load', function () {
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.getElementsByClassName('needs-validation');
+                            // Loop over them and prevent submission
+                            var validation = Array.prototype.filter.call(forms, function (form) {
+
+                                form.addEventListener('submit', function (event) {
+                                    if (form.checkValidity() === false) {
+                                        event.preventDefault();
+                                        event.stopPropagation();
+                                    }
+                                    if (form.checkValidity() == true) {
+                                        alert("Welcome to Yummy Everywhere!");
+                                    }
+                                    form.classList.add('was-validated');
+                                }, false);
+                            });
+                        }, false);
+                    })();
+                </script>
+            </div>
+        </div>
+    </div>
+
+
+
 </body>
 
 </html>

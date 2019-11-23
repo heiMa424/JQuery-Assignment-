@@ -8,7 +8,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css">
     <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="jslib/moment.js"></script>
+    <script type="text/javascript" src="jslib/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script>
         //search function below
@@ -80,6 +84,9 @@
 
             $('.login').click(function () {
                 $('#loginm').modal('show');
+            });
+            $('.mypanel').click(function () {
+                $('#panelm').modal('show');
             });
             // get json for mcd menu
             $.ajax({
@@ -176,6 +183,26 @@
             })
         });  
     </script>
+
+    <script>
+        //favorite and unfavorite function
+        $(document).ready(function() {
+            $("#mcdf").click(function() {
+                var $clone = $("#mcdj").clone().prop('id', "mcdjfav");
+                $("#fav").append($clone);
+                $("#mcdf").hide();
+                $("#cheeky").show();
+                $("#fav #mcdf").hide();
+                $("#fav #mcdr").show().prop('id', 'mcdr2');
+
+                $("#mcdr2").click(function() {
+                $("#mcdjfav").remove();
+                $("#cheeky").hide();
+                $("#mcdf").show();
+                })
+            })
+        })
+    </script>
 </head>
 
 <body>
@@ -203,7 +230,7 @@
                     <h1><a href="#find">Find</a></h1>
                 </div>
                 <div class="col-4">
-                    <h1><a class="login" href="#">Reserve</a></h1>
+                    <h1><a class="mypanel" href="#">Reserve</a></h1>
                 </div>
             </div>
         </div>
@@ -252,7 +279,7 @@
         </div>
         <input class="form-control" id="myInput" type="text" placeholder="Search..">
         <div id="finder">
-            <div class="jumbotron">
+            <div class="jumbotron" id="mcdj">
                 <h3><img src="img/mcdonalds.png" height="60px" width="60px" /> Mcdonalds</h3>
                 Cuisine: Western, Fast Food<br />
                 <div class="progress">
@@ -269,7 +296,9 @@
                 
                 <button type="button" id="mcdl" class="btn btn-success">Like</button>
                 <button type="button" id="mcddl" class="btn btn-danger">Dislike</button>
-                
+                <button type="button" id="mcdf" class="btn">Add to Favorites</button>
+                <button type="button" id="cheeky" class="btn" style="display: none;">Already In Your Favorites</button>
+                <button type="button" id="mcdr" class="btn" style="display: none;">Remove From Favorites</button>
             </div>
 
             <div class="jumbotron">
@@ -284,8 +313,11 @@
                     </div>
                 </div>
                 <br />
-                <button type="button" id="kfcb" class="btn btn-success" data-toggle="modal" data-target="#kfcm">View the
+                <button type="button" id="kfcb" class="btn btn-info" data-toggle="modal" data-target="#kfcm">View the
                     Menu</button>
+                    <button type="button"  class="btn btn-success">Like</button>
+                    <button type="button"  class="btn btn-danger">Dislike</button>
+                    <button type="button"  class="btn">Add to Favorites</button>
             </div>
 
             <div class="jumbotron">
@@ -302,6 +334,9 @@
                 <br />
                 <button type="button" id="stbb" class="btn btn-info" data-toggle="modal" data-target="#stbm">View the
                     Menu</button>
+                    <button type="button"  class="btn btn-success">Like</button>
+                    <button type="button"  class="btn btn-danger">Dislike</button>
+                    <button type="button" class="btn">Add to Favorites</button>
 
             </div>
 
@@ -319,6 +354,9 @@
                 <br />
                 <button type="button" id="pzhb" class="btn btn-info" data-toggle="modal" data-target="#pzhm">View the
                     Menu</button>
+                    <button type="button"  class="btn btn-success">Like</button>
+                    <button type="button"  class="btn btn-danger">Dislike</button>
+                    <button type="button"  class="btn">Add to Favorites</button>
             </div>
 
             <div class="jumbotron">
@@ -335,14 +373,34 @@
                 <br />
                 <button type="button" id="dryb" class="btn btn-info" data-toggle="modal" data-target="#drym">View the
                     Menu</button>
+                    <button type="button"  class="btn btn-success">Like</button>
+                    <button type="button" class="btn btn-danger">Dislike</button>
+                    <button type="button"  class="btn">Add to Favorites</button>
             </div>
         </div>
+    </div>
+        <div class="container-fluid second">
+        <div class="row">
+            <div class="col-6"></div>
+            <div class="col-3"></div>
+            <div class="col-2"></div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+    <div class="container-fluid" id="fav">
+        <div class="row">
+            <h2>My Favourites</h2>
+
+        </div>
+        <br />
     </div>
     <div class="navbar">
         <a href="#home">Home</a>
         <a href="#explore">Explore</a>
         <a href="#find">Find</a>
-        <a class="login" href="#">Reserve</a>
+        <a href="#fav">Favourites</a>
+        <a class="mypanel" href="#">My Panel</a>
+        <a href="YummyEverywhere.html">Logout</a>
     </div>
 
 
@@ -358,21 +416,52 @@
 
                 <!-- Modal body -->
                 <div class="modal-body" id="mcdmodal">
+                    <div class="form-group">
+                            <select class="form-control" id="sel1">
+                                <option selected="selected">Select Your Branch</option>
+                                <optgroup label="New Territories">
+                                <option>Shatin Centre, Shatin</option>
+                                <option>Lee On Estate, Ma On Shan</option>
+                                </optgroup>
+                                <optgroup label="Kowloon">
+                                <option> Kowloon City Plaza, Kowloon City</option>
+                                <option>Peking Road, Tsim Sha Tsui</option>
+                                </optgroup>
+                                <optgroup label="HK Island">
+                                <option>King's Road, North Point</option>
+                                </optgroup>
+                            </select>
+                    </div>
+
+                    <script>
+                            $(document).ready(function() {
+                                $("#restaurant-content").hide();
+                                $("#sel1").change(function(){
+                                   $("#restaurant-content").show();
+                                })
+                            })
+                        </script>
+
                     <ul class="nav nav-tabs" id="tabContent">
                         <li class="active"><a href="#mcdinfo" data-toggle="tab">About Us</a></li>
                         <li><a href="#mcdmenupane" data-toggle="tab">Menu</a></li>
                         <li><a href="#mcdcomment" data-toggle="tab">Comments</a></li>
+                        <li><a href="#mcdreserve" data-toggle="tab">Reserve</a></li>
                     </ul>
 
-                    <div class="tab-content">
+                    <div class="tab-content" id="restaurant-content">
                         <div class="tab-pane active" id="mcdinfo">
+                            <br />
                             <div class="jumbotron">An absolute classic in the field of fast food, come try our
                                 absolutely delicious Big Mac!<br /><br />
 
-                                Location: Shatin Centre, 2-16 Wang Pok Street, Sha Tin<br />
-                                Website: mcdonalds.com.hk<br />
-                                Phone: 2603 4161<br />
-                                Open Now!<br />
+                                <b>Location:</b> Shatin Centre, 2-16 Wang Pok Street, Sha Tin<br />
+                                <b>Website:</b> mcdonalds.com.hk<br />
+                                <b>Phone:</b> 2603 4161<br />
+                                <br />
+                                <b>Ongoing Promotions:</b> 10% Off Cheeseburgers! <br/>
+                                <br />
+                                <b>Open Now!</b><br />
                             </div>
 
                             <!-- <div class="control-group">
@@ -381,7 +470,9 @@
                         </div>
 
                         <div class="tab-pane" id="mcdmenupane">
+                                <br />
                             <div class="jumbotron" id="mcdmenu">
+                                
                             </div>
                         </div>
                         <div class="tab-pane" id="mcdcomment">
@@ -396,17 +487,43 @@
                             <script>
                                 $(document).ready(function() {
                                     $("#commentb").click(function(){
-                                        $("#commentarea").append("<div class='jumbotron'>" +$("#comment").val()+"</div>");
+                                        $datetime = moment().format('MMMM Do YYYY, h:mm:ss a');
+                                        $("#commentarea").append("<div class='jumbotron'><b>User:</b> Arthur <br /><b>Posted On:</b> "+$datetime+"<br / ><b>Comment:</b> " +$("#comment").val()+"<br /></div>");
                                     })
                                 })
                             </script>
                             <div id="commentarea">
                             <div class="jumbotron">
-                                User: Matthew <br />
-                                Datetime: 2:15pm 16/10/2019<br />
-                                Comment: Very Delicious!
+                                <b>User:</b> Matthew <br />
+                                <b>Posted On:</b> November 23rd 2019, 8:50:12 am<br />
+                                <b>Comment:</b> Very Delicious!
                             </div>
                             </div>
+                        </div>
+                        <div class="tab-pane" id="mcdreserve">
+                                <br />
+                                <form action="" class="needs-validation">
+                                <label for="datetime">Date and Time:</label>
+                                <input type="text" class="form-control" id="datetime" placeholder="Click to select date/time">
+                                <br />
+                                <script>
+                                    $(document).ready(function() {
+                                      $('#datetime').datetimepicker({
+                                          stepping: 1,
+                                          minDate: true
+                                          
+                                      });
+
+                                    });
+                                </script>
+                                <div class="form-group">
+                                        <label for="phone">Phone:</label>
+                                        <input type="text" class="form-control" id="phone" value="12345678" name="phone"
+                                            required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Make Reservation</button>
+                                </form>
+
                         </div>
                     </div>
                 </div>
@@ -516,52 +633,178 @@
         </div>
     </div>
 
-    <div class="modal fade" id="loginm">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h1 class="modal-title">Yummy Everywhere</h1>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-
-
-                    <form action="YummyLogin.html" class="needs-validation" method="POST" novalidate>
-                        <div class="form-group">
-                            <label for="uname">Username:</label>
-                            <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname"
-                                required>
-
+    <div class="modal fade" id="panelm">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+    
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">My Panel</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+    
+                    <!-- Modal body -->
+                    <div class="modal-body" id="panelmodal">
+                        <!-- <div class="form-group">
+                                <select class="form-control" id="sel1">
+                                    <option selected="selected">Select Your Branch</option>
+                                    <optgroup label="New Territories">
+                                    <option>Shatin Centre, Shatin</option>
+                                    <option>Lee On Estate, Ma On Shan</option>
+                                    </optgroup>
+                                    <optgroup label="Kowloon">
+                                    <option> Kowloon City Plaza, Kowloon City</option>
+                                    <option>Peking Road, Tsim Sha Tsui</option>
+                                    </optgroup>
+                                    <optgroup label="HK Island">
+                                    <option>King's Road, North Point</option>
+                                    </optgroup>
+                                </select>
                         </div>
-                        <div class="form-group">
-                            <label for="pwd">Password:</label>
-                            <input type="password" class="form-control" id="pwd" placeholder="Enter password"
-                                name="pswd" required>
+    
+                        <script>
+                                $(document).ready(function() {
+                                    $(".tab-content").hide();
+                                    $("#sel1").change(function(){
+                                       $(".tab-content").show();
+                                    })
+                                })
+                            </script>
+     -->
+                        <ul class="nav nav-tabs" id="tabContent">
+                            <li class="active"><a href="#panelreserves" data-toggle="tab">My Reservations</a></li>
+                            <li><a href="#paneldetails" data-toggle="tab">My Details</a></li>
+                        </ul>
+                        <script>
+                        $(document).ready(function(){
+                            $(".tab-content panel").show();
+                        })
+                        </script>
+    
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="panelreserves">
+                                <br />
+                                <script>
 
+                                            function cancelReservation() {
+                                                var date = moment($("#reserveDate").text()).utc();
+                                                var now = moment();
+                                                if (date > now.subtract(24, 'hours'))
+                                                    $("#reservation").remove();
+                                                else
+                                                    alert("You cannot cancel a reservation within 24 hours of the date of the booking");
+                                            }
+                                </script>
+                                <div class="form-group">
+                                        <select class="form-control" id="sel1">
+                                            <option selected="selected">Select Your Restaurant</option>
+                                            <optgroup label="McDonalds">
+                                            <option>Shatin Centre, Shatin</option>
+                                            <option>Lee On Estate, Ma On Shan</option>
+                                            </optgroup>
+                                            <optgroup label="KFC">
+                                            <option> Kowloon City Plaza, Kowloon City</option>
+                                            <option>Peking Road, Tsim Sha Tsui</option>
+                                            </optgroup>
+                                            <optgroup label="Starbucks">
+                                            <option>King's Road, North Point</option>
+                                            </optgroup>
+                                        </select>
+                                        <a href="#" id="addReserve" class="btn btn-primary">Add a Reservation</a>
+                                </div>
+                                <script>
+                                    $(document).ready(function() {
+                                        $("#addReserve").click(function(){
+                                            $("#panelm").hide();
+                                            $("#mcdm .modal-body .nav-tabs a:eq('3')").tab('show');
+                                        })
+                                    }) 
+                                </script>
+                                <br />
+                                <div class="jumbotron" id="reservation">
+                                    <b>Location:</b> Shatin Centre, 2-16 Wang Pok Street, Sha Tin<br />
+                                    <b>Datetime:</b> <div id=reserveDate>November 23rd 2019, 8:00:00 pm</div><br />
+                                    <b>Phone Number Provided:</b> 1234 5678<br />
+                                    <br />
+                                    <button type="reset" class="btn btn-danger" onclick="cancelReservation()">Cancel Reservation</button>
+                                </div>
+
+    
+                                <!-- <div class="control-group">
+                                   <label class="control-label">Instance Name</label>
+                               </div> -->
+                            </div>
+    
+                            <div class="tab-pane" id="paneldetails">
+                                <br />
+                                <form action="" class="needs-validation"
+                                oninput='pswd2.setCustomValidity(pswd2.value != pswd.value ? "Passwords do not match." : ""); pswd.setCustomValidity(pswd.value.length < 8 ? "Password has to be at least 8 characters long." :"")'>
+                                        <div class="form-group">
+                                            <label for="uname">Username:</label>
+                                            <input type="text" class="form-control" id="uname" placeholder="Arthur" name="uname"
+                                                readonly>
+                
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pwd">Change Password:</label>
+                                            <input type="password" class="form-control" id="pwd" placeholder="Enter new password"
+                                                name="pswd" required>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="pwd">Confirm New Password:</label>
+                                                <input type="password" class="form-control" id="pwd2" placeholder="Confirm new password"
+                                                    name="pswd2" required>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="email">Email:</label>
+                                                <input type="email" class="form-control" id="email" placeholder="hi@hi.com" name="email"
+                                                    required>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="phone">Phone:</label>
+                                                <input type="text" class="form-control" id="phone" placeholder="12345678" name="phone"
+                                                    required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        
+                                </form>
+
+                                <script>
+                                        // Example starter JavaScript for disabling form submissions if there are invalid fields
+                                        (function () {
+                                            'use strict';
+                                            window.addEventListener('load', function () {
+                                                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                                var forms = document.getElementsByClassName('needs-validation');
+                                                // Loop over them and prevent submission
+                                                var validation = Array.prototype.filter.call(forms, function (form) {
+                    
+                                                    form.addEventListener('submit', function (event) {
+                                                        if (form.checkValidity() === false) {
+                                                            event.preventDefault();
+                                                            event.stopPropagation();
+                                                        }
+                                                        if (form.checkValidity() == true) {
+                                                            alert("Confirmed!");
+                                                        }
+                                                        form.classList.add('was-validated');
+                                                    }, false);
+                                                });
+                                            }, false);
+                                        })();
+                                </script>
+                            </div>
                         </div>
-                        <div class="form-group form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="remember" required> Remember me
-
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <button type="reset" class="btn btn-danger">Clear</button>
-                    </form>
+                    </div>
+    
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+    
                 </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-
             </div>
         </div>
-    </div>
 
 
 </body>

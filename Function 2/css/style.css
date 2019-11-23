@@ -101,6 +101,15 @@ p {
     color: #ddd;
 }
 
+.modal-footer a {
+    color: #000000;
+}
+
+.modal-footer a:hover {
+
+    color: red;
+}
+
 .icon {
     transition: all .3s linear;
 }
@@ -231,13 +240,29 @@ p {
     width: 70%;
 }
 
-/* .container-fluid:nth-child(7) h3:before{
-    content: "";
-    display: block;
-    background: url("../img/mcdonalds.png") no-repeat;
-    background-size: 60px 60px;
-    width: 60px;
-    height: 60px;
-    float: left;
-    margin: 0 6px 0 0;
-} */
+
+.container-fluid:nth-child(8) {
+    background-color: #ccc;
+    transform: skewY(-2deg);
+
+}
+
+.container-fluid:nth-child(8) h1 {
+    color: #fff;
+}
+
+.container-fluid:nth-child(8) .container {
+    transform: skewY(2deg);
+}
+
+.container-fluid:nth-child(9) .icon{
+    padding-left: 100px;
+        
+        padding-top:20px;
+}
+
+
+
+.container-fluid:nth-child(9) h2{
+    padding-left: 100px;
+}
