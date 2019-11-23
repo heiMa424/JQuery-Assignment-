@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>AdministratorPage</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/adminBg.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../jslib/jquery-1.11.1.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() { 
+      var adminRow = 1;
+      var opRow = 1;
+      var nsRow = 1;  
+          var role = ["Administrator","Operator","Normal_user"];  
+          // $.getJSON('userData.json', function(tb){
+          //    var showTb="";
+          //    for(i=0;i<=tb.userPassword.length-1;i++){
+          //     showTb+="<tr id='"+row+"'><td><button type='button' class='btn btn-primary' data-toggle='modal' style='width:auto;' data-target='#edit"+tb.userName[i]+"'>Edit</button></td><td>"+
+          //           "<input type='text' class='form-control' style='width: auto;' value='"+ tb.userName[i]+ "' />"+
+          //           "</td><td><input type='text' class='form-control' style='width: auto;' value='"+tb.userPassword[i]+ "' /></td><td>"+ 
+          //               "<select class='form-control' id='role' value='role"+ tb.userRole[i]+ "'><option value='Administrator'>Administrator</option><option  value='Operator'>Operator</option><option  value='Normal_user'>Normal_user</option></select>"+
+          //           "</td><td><button type='button' class='btn btn-danger' data-toggle='modal' style='width:auto;' data-target='#delete"+tb.userName[i]+"'>Delete</button></td></tr>";
+          //           row++;
+          //    }
+          //    for(check=0;check<3;check++){
+          //    if($("#role"+ tb.userRole[i]).val()==role[check]){
+          //     $($("#role"+ tb.userRole[i])+" option[value='"+role[check]+"']").attr("selected","selected");
+          //    }
+          //    }
+             
+          //    $("tbody").append(showTb);
+          // });
+          $("#addAdminUser").click(function(){
+            adminRow++
+            $("#adminTbody").append("<tr id='admin'><td><button type='button' class='btn btn-primary' data-toggle='modal' style='width:auto;' data-target='#editAdmin"+adminRow+"'>Edit</button>"+
+              "<div class='modal fade' id='editAdmin"+adminRow+"'><div class='modal-dialog modal-lg'><div class='modal-content'><div class='modal-header'><h4 class='modal-title'>User Information</h4>"+
+              "<button type=button class=close data-dismiss=modal>&times;</button></div><div class='modal-body'>"+
+              "<label for='demo'>Email:</label><input type='text' class='form-control' placeholder='Email' id='demo' name='email' value='' >"+
+              "<hr><label for='example-tel-input' class='col-2 col-form-label'>Telephone</label>"+
+              "<input class='form-control' type='tel' value='' id='example-tel-input' placeholder='Example: 12345678'>"+
+              "</div><div class='modal-footer'>"+
+              "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button></div></td>"+
+              "<td><input type='text' class='form-control' style='width: auto;' value='' placeholder='User Name' />"+
+              "</td><td><input type='text' class='form-control' style='width: auto;' value='' placeholder='User Password'/></td>"+ 
+              "<td><button type='button' class='btn btn-danger' data-toggle='modal' style='width:auto;'  id='delete'>Delete</button></td></tr>");
+                      
+          });
+          $("#addOpUser").click(function(){
+            opRow++
+            $("#opTbody").append("<tr id='op"+opRow+"'><td><button type='button' class='btn btn-primary' data-toggle='modal' style='width:auto;' data-target='#editOp"+opRow+"'>Edit</button>"+
+              "<div class='modal fade' id='editOp"+opRow+"'><div class='modal-dialog modal-lg'><div class='modal-content'><div class='modal-header'><h4 class='modal-title'>User Information</h4>"+
+              "<button type=button class=close data-dismiss=modal>&times;</button></div><div class='modal-body'>"+
+                "<label for='demo'>Email:</label><input type='text' class='form-control' placeholder='Email' id='demo' name='email' value='' >"+
+              "<hr><label for='example-tel-input' class='col-2 col-form-label'>Telephone</label>"+
+              "<input class='form-control' type='tel' value='' id='example-tel-input' placeholder='Example: 12345678'>"+
+              "</div><div class='modal-footer'>"+
+              "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button></div></td>"+
+              "<td><input type='text' class='form-control' style='width: auto;' value='' placeholder='User Name' />"+
+              "</td><td><input type='text' class='form-control' style='width: auto;' value='' placeholder='User Password'/></td>"+ 
+              "<td><button type='button' class='btn btn-danger' data-toggle='modal' style='width:auto;'  id='delete'>Delete</button></td></tr>");
+                      
+          });
+          $("#addNsUser").click(function(){
+            nsRow++
+            $("#nsTbody").append("<tr id='ns"+nsRow+"'><td><button type='button' class='btn btn-primary' data-toggle='modal' style='width:auto;' data-target='#editNs"+nsRow+"'>Edit</button>"+
+              "<div class='modal fade' id='editNs"+nsRow+"'><div class='modal-dialog modal-lg'><div class='modal-content'><div class='modal-header'><h4 class='modal-title'>User Information</h4>"+
+              "<button type=button class=close data-dismiss=modal>&times;</button></div><div class='modal-body'>"+
+                "<label for='demo'>Email:</label><input type='text' class='form-control' placeholder='Email' id='demo' name='email' value='' >"+
+              "<hr><label for='example-tel-input' class='col-2 col-form-label'>Telephone</label>"+
+              "<input class='form-control' type='tel' value='' id='example-tel-input' placeholder='Example: 12345678'>"+
+              "</div><div class='modal-footer'>"+
+              "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button></div></td>"+
+              "<td><input type='text' class='form-control' style='width: auto;' value='' placeholder='User Name' />"+
+              "</td><td><input type='text' class='form-control' style='width: auto;' value='' placeholder='User Password'/></td>"+ 
+              "<td><button type='button' class='btn btn-info' data-toggle='modal' data-target='#resetPassword'>Reset Password</button></td>"+
+              "<td><button type='button' class='btn btn-danger' data-toggle='modal' style='width:auto;'  id='delete'>Delete</button></td></tr>");
+                      
+          });
+          $("tbody").on('click', '#delete', function () {
+          $(this).closest('tr').remove();
+          }); 
+          
+          $("#save1").click(function(){
+            alert("Saved");
+          });
+          $("#save2").click(function(){
+            alert("Saved");
+          });
+          $("#save3").click(function(){
+            alert("Saved");
+          });
+
+          $("#checkPassword").click(function(){
+            if($("#newPass").val()!=""||$("#confirmNewPass").val()!=""){
+            if($("#newPass").val()==$("#confirmNewPass").val()){
+              alert("Password Reset successful.");
+            }else{
+              alert("Password not match! Please try again!");
+            }
+            }else{
+              alert("You should fill the password! Please try again!");
+            }
+          });
+
+        
+    });
+    </script>
+    <script>
+      //search function below
+      $(document).ready(function () {
+          $("#OpInput").on("keyup", function () {
+              // var value = $(this).val().toLowerCase();
+
+              // $('tr#admin').each(function () {
+              //     var $this = $(this);
+              //     if ($this.text().toLowerCase().indexOf(value) === -1)
+              //         $this.closest('tr#admin').fadeOut();
+              //     else $this.closest('tr#admin').fadeIn();
+              // });
+              var value = $(this).val().toLowerCase();
+                $("#opTable > tbody > tr").filter(function() {      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+              });
+          });
+
+          $("#NsInput").on("keyup", function () {
+              // var value = $(this).val().toLowerCase();
+
+              // $('tr#admin').each(function () {
+              //     var $this = $(this);
+              //     if ($this.text().toLowerCase().indexOf(value) === -1)
+              //         $this.closest('tr#admin').fadeOut();
+              //     else $this.closest('tr#admin').fadeIn();
+              // });
+              var value = $(this).val().toLowerCase();
+                $("#nsTable > tbody > tr").filter(function() {      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+              });
+          });
+      });
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-inverse" >
+    <div class="container-fluid" >
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#"><b>Food Yummy EveryWhere</b></a>
+      </div>
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+
+        <li id="logout"><a href="#"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+      </ul>
+  </nav>
+  <div style="background-color:#FFD382;padding:10px;margin-bottom:5px;" id="tableList">
+      
+          <h2>Administrator List's <button type='button' class='btn btn-info'  style='width:auto; float: right; margin-right: 5%;'  id="addAdminUser">Add User</button></h2> 
+          
+          
+
+
+
+          <table class="table table-hover" id="adminTable">
+            <thead>
+              <tr>
+                <th>Information</th>
+                <th>User Name</th>
+                <th>Password</th>
+                
+                <th>Delete User</th>
+              </tr>
+            </thead>
+            <tbody id="adminTbody">
+                <tr id='admin'>
+                  <td><button type='button' class='btn btn-primary' data-toggle='modal' style='width:auto;' data-target='#editAdmin1'>Edit</button></td>
+                  <!-- The Modal -->
+  <div class="modal fade" id="editAdmin1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">User Information</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          
+          <!-- Modal body -->
+          <div class="modal-body">
+              
+      <label for="demo">Email:</label>
+
+      <input type="text" class="form-control" placeholder="Email" id="demo" name="email" value="arthur123@gmail.com" >
+      <hr>
+      
+      <label for="example-tel-input" class="col-2 col-form-label">Telephone</label>
+
+    <input class="form-control" type="tel" value="92837212" id="example-tel-input">
+ 
+
+          </div>
+          
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+                  <td><input type='text' class='form-control' style='width: auto;' value='Arthur' /></td>
+                  <td><input type='text' class='form-control' style='width: auto;' value='admin' /></td>
+                 
+                  <td><button type='button' class='btn btn-danger'  style='width:auto;'  id='delete'>Delete</button></td>
+                </tr>
+                
+                
+            </tbody>
+          </table>
+          <button type='button' class='btn btn-success'  style='width:auto; float: right; margin-right: 3%; margin-top: -2.5%;'  id="save1">Save</button>
+  </div>
+ 
+  
+
+</div>
+
+
+<div style="background-color:#FFD382;padding:10px;margin-bottom:5px;" id="tableList">
+      
+  <h2>Operator List's <button type='button' class='btn btn-info'  style='width:auto; float: right; margin-right: 5%;'  id="addOpUser">Add User</button></h2> 
+
+  <!-- search bar -->
+  <div class="row" style="padding:10px;margin-bottom:5px;">
+    <h4>Search User</h4>
+</div>
+<input class="form-control" id="OpInput" type="text" placeholder="Search.." style="width: 20%;">
+
+  <table class="table table-hover" id="OpTable">
+    <thead>
+      <tr>
+        <th>Information</th>
+        <th>User Name</th>
+        <th>Password</th>
+        
+        <th>Delete User</th>
+      </tr>
+    </thead>
+    <tbody id="opTbody">
+        <tr id='op1'>
+            <td><button type='button' class='btn btn-primary' data-toggle='modal' style='width:auto;' data-target='#editOp1'>Edit</button></td>
+            <!-- The Modal -->
+<div class="modal fade" id="editOp1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+
+  <!-- Modal Header -->
+  <div class="modal-header">
+    <h4 class="modal-title">User Information</h4>
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+  </div>
+  
+  <!-- Modal body -->
+  <div class="modal-body">
+    
+      <label for="demo">Email:</label>
+
+      <input type="text" class="form-control" placeholder="Email" id="demo" name="email" value="hayden123@gmail.com" >
+      <hr>
+      
+      <label for="example-tel-input" class="col-2 col-form-label">Telephone</label>
+
+    <input class="form-control" type="tel" value="73612834" id="example-tel-input">
+  </div>
+  
+  <!-- Modal footer -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  </div>
+            <td><input type='text' class='form-control' style='width: auto;' value='Hayden' /></td>
+            <td><input type='text' class='form-control' style='width: auto;' value='abc' /></td>
+            
+            <td><button type='button' class='btn btn-danger'  style='width:auto;'  id='delete'>Delete</button></td>
+        </tr>
+         
+    </tbody>
+  </table>
+  <button type='button' class='btn btn-success'  style='width:auto; float: right; margin-right: 3%; margin-top: -2.5%;'  id="save2">Save</button>
+</div>
+
+
+
+</div>
+
+
+<div style="background-color:#FFD382;padding:10px;margin-bottom:5px;" id="tableList">
+      
+  <h2>Normal_user List's <button type='button' class='btn btn-info'  style='width:auto; float: right; margin-right: 5%;'  id="addNsUser">Add User</button></h2> 
+
+
+  <!-- search bar -->
+  <div class="row" style="padding:10px;margin-bottom:5px;">
+    <h4>Search User</h4>
+</div>
+<input class="form-control" id="NsInput" type="text" placeholder="Search.." style="width: 20%;">
+
+
+  <table class="table table-hover" id="NsTable">
+    <thead>
+      <tr>
+        <th>Information</th>
+        <th>User Name</th>
+        <th>Password</th>
+        <th>Reset Password</th>
+        <th>Delete User</th>
+      </tr>
+    </thead>
+    <tbody id="nsTbody">
+        
+        <tr id='ns1'>
+            <td><button type='button' class='btn btn-primary' data-toggle='modal' style='width:auto;' data-target='#editNs1'>Edit</button></td>
+            <!-- The Modal -->
+<div class="modal fade" id="editNs1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+
+  <!-- Modal Header -->
+  <div class="modal-header">
+    <h4 class="modal-title">User Information</h4>
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+  </div>
+  
+  <!-- Modal body -->
+  <div class="modal-body">
+   
+      <label for="demo">Email:</label>
+
+      <input type="text" class="form-control" placeholder="Email" id="demo" name="email" value="peter123@gmail.com" >
+      <hr>
+      
+      <label for="example-tel-input" class="col-2 col-form-label">Telephone</label>
+
+    <input class="form-control" type="tel" value="77777777" id="example-tel-input">
+  </div>
+  
+  <!-- Modal footer -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  </div>
+            <td><input type='text' class='form-control' style='width: auto;' value='Peter' /></td>
+            <td><input type='text' class='form-control' style='width: auto;' value='123' /></td>
+            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#resetPassword">Reset Password</button></td>
+            <td><button type='button' class='btn btn-danger'  style='width:auto;'  id='delete'>Delete</button></td>
+        </tr>  
+    </tbody>
+  </table>
+  <button type='button' class='btn btn-success'  style='width:auto; float: right; margin-right: 3%; margin-top: -2.5%;'  id="save3">Save</button>
+</div>
+ <!-- The Modal -->
+ <div class="modal fade" id="resetPassword">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Reset Password</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+      <!-- Modal body -->
+      <div class="modal-body">
+        <label for="pwd">New Password:</label>
+    <input type="password" class="form-control"  name="password" placeholder="Password" id="newPass">
+        <hr>
+        <label for="pwd">Confirm New Password:</label>
+    <input type="password" class="form-control"  name="password" placeholder="Confirm Password" id="confirmNewPass">
+      </div>
+      
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" id="checkPassword" data-dismiss="modal">Reset</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+</body>
+</html>

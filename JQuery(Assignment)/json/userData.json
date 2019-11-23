@@ -1,0 +1,5 @@
+{
+    "userName": ["Arthor","Hayden","Peter"],
+    "userPassword": ["admin","abc",123],
+    "userRole": ["Administrator","Operator","Normal_user"]
+    }

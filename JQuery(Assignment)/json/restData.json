@@ -1,0 +1,16 @@
+{
+"restaurantName": ["Mcdonald","KFC","Mos Burger","Fairwood"],
+"branches": ["Sha Tin","Wan Chai","Sheung Shui","Kwun Tong"],
+"openDate": ["Monday - Sunday: 24hours","Monday - Sunday: 11:00 - 22:30",
+            "Monday - Sunday: 8:00 ~ 22:00","07:00~18:00 (Mon-Fri), 07:00~16:00 (Sat), Closed (Sun & Public Holiday)"],
+"address": ["Shop Nos. 245-247, 2/F, Wo Che Shopping Centre, Wo Che Estate, Tak Hau Street, Shatin, N.T.",
+            "B/M & G/F (Portions), Kwong Sang Hong Building, 298 Hennessy Road, Wan Chai, Hong Kong",
+            "B/M & G/F (Portions), Kwong Sang Hong Building, 298 Hennessy Road, Wan Chai",
+            "Shop 2033-2034, 2/F, Sheung Shui Centre, 3 Chi Cheong Road, Sheung Shui",
+            "Shop No. 1, 1/F, Millennium City 6, No. 392 Kwun Tong Road, Kwun Tong, Kowloon"],
+"telephone": [26998365,28329063,21482270,28568663],
+"dishes": ["United States of America","United States of America","United States of America","Hong Kong Style"],
+"type": ["Fast Food","Fast Food","Fast Food","Fast Food"],
+"uploadPhoto": ["mcdonald.png","kfc.png","mosBurger.png","fairwood.png"]
+}
+

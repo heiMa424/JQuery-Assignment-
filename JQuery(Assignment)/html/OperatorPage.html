@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../jslib/jquery-1.11.1.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <script>
+    var getName;
+    
+    // function editUpdate(){
+    //     document.getElementById("editName").disabled = false;
+    //       document.getElementById("editBranches").disabled = false;
+    //       document.getElementById("openDate").disabled = false;
+    //       document.getElementById("address").disabled = false;
+    //       document.getElementById("editPhone").disabled = false;
+    //       document.getElementById("dishes").disabled = false;
+    //       document.getElementById("restType").disabled = false;
+    //       document.getElementById("uploadPhoto").disabled = false;
+    //       document.getElementById('btnUpdate').style.visibility = 'hidden';
+    //       document.getElementById('saveRest').style.visibility = 'visible';
+    //       document.getElementById('edMenu').style.visibility = 'hidden';
+    //   }
+        function updateSave() {
+          alert("Saved");
+          // document.getElementById("editName").disabled = true;
+          // document.getElementById("editBranches").disabled = true;
+          // document.getElementById("openDate").disabled = true;
+          // document.getElementById("address").disabled = true;
+          // document.getElementById("editPhone").disabled = true;
+          // document.getElementById("dishes").disabled = true;
+          // document.getElementById("restType").disabled = true;
+          // document.getElementById("uploadPhoto").disabled = true;
+          // document.getElementById('addMenu1').style.visibility = 'visible';
+          // document.getElementById('btnUpdate').style.visibility = 'visible';
+          // document.getElementById('saveRest').style.visibility = 'hidden';
+          // document.getElementById('edMenu').style.visibility = 'visible';
+        }
+    $(document).ready(function () {
+      var saveCreateForm=[];
+      var size=0;
+      var cal=0;
+        var showTb = "";
+        var count = 0;      
+
+        $("#addMenuMC").click(function(){
+          var row = 0;
+          $("#menuTableMC").append("<tr id="+row+"><td><input type='text'></td><td><select><option>special</option><option>temporary</option><option>seasonal</option></select></td><td><input id='date' type='text' placefolder='dd-mm-yyyy'> to <input id='date2' type='text' placefolder='dd-mm-yyyy'></td><td><input type='text'></td><td><input type='checkbox' value='hide'>Hidden</td><td><button id='deleteMenuMC'>Delete Menu</button></td></tr>");
+          row = row + 1;
+        });
+        $("#menuTableMC").on('click', '#deleteMenuMC', function () {
+          $(this).closest('tr').remove();
+        });  
+
+        $("#addMenuKfc").click(function(){
+          var row = 0;
+          $("#menuTableKfc").append("<tr id="+row+"><td><input type='text'></td><td><select><option>special</option><option>temporary</option><option>seasonal</option></select></td><td><input id='date' type='text' placefolder='dd-mm-yyyy'> to <input id='date2' type='text' placefolder='dd-mm-yyyy'></td><td><input type='text'></td><td><input type='checkbox' value='hide'>Hidden</td><td><button id='deleteMenuKfc'>Delete Menu</button></td></tr>");
+          row = row + 1;
+        });
+        $("#menuTableKfc").on('click', '#deleteMenuKfc', function () {
+          $(this).closest('tr').remove();
+        });  
+
+        $("#addMenuMos").click(function(){
+          var row = 0;
+          $("#menuTableMos").append("<tr id="+row+"><td><input type='text'></td><td><select><option>special</option><option>temporary</option><option>seasonal</option></select></td><td><input id='date' type='text' placefolder='dd-mm-yyyy'> to <input id='date2' type='text' placefolder='dd-mm-yyyy'></td><td><input type='text'></td><td><input type='checkbox' value='hide'>Hidden</td><td><button id='deleteMenuMos'>Delete Menu</button></td></tr>");
+          row = row + 1;
+        });
+        $("#menuTableMos").on('click', '#deleteMenuMos', function () {
+          $(this).closest('tr').remove();
+        });  
+
+        $("#addMenuFair").click(function(){
+          var row = 0;
+          $("#menuTableFair").append("<tr id="+row+"><td><input type='text'></td><td><select><option>special</option><option>temporary</option><option>seasonal</option></select></td><td><input id='date' type='text' placefolder='dd-mm-yyyy'> to <input id='date2' type='text' placefolder='dd-mm-yyyy'></td><td><input type='text'></td><td><input type='checkbox' value='hide'>Hidden</td><td><button id='deleteMenuFair'>Delete Menu</button></td></tr>");
+          row = row + 1;
+        });
+        $("#menuTableFair").on('click', '#deleteMenuFair', function () {
+          $(this).closest('tr').remove();
+        }); 
+
+  
+      $("#addButton").click(function () {
+        saveCreateForm[size]=getName;
+        
+        //set the src not = "/C:fakepath"
+        var getPhoto = $('#uploadPho').val().replace(/C:\\fakepath\\/i, '');
+
+        var length = $('#branches').children('option').length;
+        var branches1=$("select#branches").val();
+        var date = $("#date").val();
+        var address = $("#inAddress").val();
+        var phone = $("#phone").val();
+        var dishes = $("#sel1").val();
+        var type = $("#type").val();
+        //var photo = $("#uploadPhoto").val();
+            getName = $("#name").val();
+
+            
+    
+
+//if img src cannot show inage, put "../photo/"
+$("#showRest").append(
+          "<a data-toggle='modal' id='Form"+getName+"' data-target='#" +
+            getName + "'><img src='../photo/"+getPhoto+"' style='width: 100px; height:100px;' alt='"+getPhoto+"' id='photo"+getName+"'></a>");
+
+$("#showForm").append("<div class='modal fade' id='"+getName+"' role='dialog'><div class='modal-dialog modal-lg'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'>&times;</button>" +
+          "<h2 class='modal-title'>Edit Restaurant </h2></div>" +
+          "<div class='modal-body'><form class='form-horizontal' id='editRestaurant'><div class='form-group' align='center'>" +
+          
+          "<button type='button' class='btn btn-danger' data-toggle='modal' style='width: 45%;' data-target='#delete"+getName+"' >Delete</button>" +
+"<div class='modal fade' id='delete"+getName+"' role='dialog' style='width: auto;'>"+
+  "<div class='modal-dialog modal-lg'>"+
+   " <div class='modal-content'>"+
+      "<div class='modal-header'>"+
+        "<button type='button' class='close' data-dismiss='modal'>&times;</button>"+
+        "<h4 class='modal-title'>Delete Resturant Form</h4>"+
+      "</div>"+
+      "<div class='modal-body'>"+
+        "<p>Are you sure want to delete the Resturant Form?</p>"+
+      "</div>"+
+      "<div class='modal-footer'>"+
+      "<button type='button' class='btn btn-success' data-dismiss='modal' id='btnYes"+getName+"'>Yes</button>"+
+        "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>"+
+      "</div></div></div></div>" +
+          "</div><hr/>" +
+          "<div class='form-group'><label class='control-label col-sm-2' >Restaurant Name:</label><div class='col-sm-10'>" +
+          "<input type='text' class='form-control' style='width:50%;' id='editName' placeholder='Enter Name'   value='"+getName+"'></div></div><hr/>" +
+          "<div class='form-group'><label class='control-label col-sm-2' for='branches'>Branches:</label><div class='col-sm-10'>" +
+          "<select class='form-control' id='editBranches' style='width:45%;'  value='branches"+getName+"'><option value='Mount Davis'>Mount Davis</option value='Kennedy Town'><option value='Kennedy Town'>Kennedy Town</option>" +
+          "<option value='Pok Fu Lam'>Pok Fu Lam</option><option value='Western District'>Western District</option><option value='Mid Levels'>Mid Levels</option><option value='Peak'>Peak</option><option value='Sai Ying Pun'>Sai Ying Pun</option><option value='Central'>Central</option><option value='Wan Chai'>Wan Chai</option>" +
+          "<option value='Happy Valley'>Happy Valley</option><option value='Causeway Bay'>Causeway Bay</option><option value='North Point'>North Point</option><option value='Quarry Bay'>Quarry Bay</option><option value='Sau Kei Wan'>Sau Kei Wan</option>" +
+          "<option value='Chai Wan'>Chai Wan</option><option value='Stonecutters Island'>Stonecutters Island</option><option  value='Lai Chi Kok'>Lai Chi Kok</option><option value='Cheung Sha Wan'>Cheung Sha Wan</option><option value='North Cheung Sha Wan'>North Cheung Sha Wan</option>" +
+          "<option value='Sham Shui Po'>Sham Shui Po</option><option value='Mong Kok'>Mong Kok</option><option value='Shek Kip Mei'>Shek Kip Mei</option><option value='Yau Ma Tei'>Yau Ma Tei</option><option value='Tsim Sha Tsui'>Tsim Sha Tsui</option>" +
+          "<option value='King's Park'>King's Park</option><option value='Ho Man Tin'>Ho Man Tin</option><option value='Kowloon Tong'>Kowloon Tong</option><option value='Hung Hom'>Hung Hom</option><option value='Ma Tau Kok'>Ma Tau Kok</option>" +
+          "<option value='Wong Tai Sin'>Wong Tai Sin</option><option value='Kowloon City'>Kowloon City</option><option value='Hong Kong Airport (Kai Tak)'>Hong Kong Airport (Kai Tak)</option><option value='San Po Kong'>San Po Kong</option><option value='Jordan Valley'>Jordan Valley</option>" +
+          "<option value='Ngau Tau Kok'>Ngau Tau Kok</option><option value='Kwun Tong'>Kwun Tong</option><option value='Yau Tong'>Yau Tong</option><option value='Lei Yue Mun'>Lei Yue Mun</option><option value='Diamond Hill (Area)'>Diamond Hill (Area)</option>" +
+          "<option value='Ngau Chi Wan (Area)'>Ngau Chi Wan (Area)</option><option value='Lung Cheung Road (Area)'>Lung Cheung Road (Area)</option><option value='Tsuen Wan'>Tsuen Wan</option><option value='Sha Tin'>Sha Tin</option><option value='Tai Po'>Tai Po</option>" +
+          "<option value='Tuen Mun'>Tuen Mun</option><option value='Sai Kung'>Sai Kung</option><option value='Sai KungSheung Shui'>Sheung Shui</option><option value='Fan Ling'>Fan Ling</option><option value='Sha Tau Kok'>Sha Tau Kok</option>" +
+          "<option value='Ta Kwu Ling'>Ta Kwu Ling</option></select></div></div><hr/>" +
+          "<div class='form-group'><label class='control-label col-sm-2' >Open Date:</label><div class='col-sm-10'><textarea class='form-control' rows='5' id='openDate' placeholder='Enter Open Date' placeholder='Enter Open Date'  ></textarea></div></div><hr/>" +
+          "<div class='form-group'><label class='control-label col-sm-2' for='address'>Address:</label><div class='col-sm-10'><textarea class='form-control' rows='5' id='address' placeholder='Enter Address'  placeholder='Enter Address' ></textarea></div></div><hr/>" +
+          "<div class='form-group'><label class='control-label col-sm-2' for='tel'>Telephone:</label><div class='col-sm-10'><input type='text' class='form-control' style='width:50%;' id='editPhone' placeholder='Enter Telephone Number'  placeholder='Enter Telephone Number'></div></div><hr/>" +
+          "<div class='form-group'><label class='control-label col-sm-2' for='dish'>Dishes:</label><div class='col-sm-10'><select class='form-control' id='dishes' style='width:45%;' value='rest"+dishes+"'  >" +
+          "<option value='Vietnam'>Vietnam</option><option value='Serbia'>Serbia</option><option value='Jordan'>Jordan</option><option value='Mexico'>Mexico</option><option value='Italy'>Italy</option>" +
+          "<option value='Hong Kong Style'>Hong Kong Style</option><option value='Mexico'>Mexico</option><option value='Taiwan'>Taiwan</option><option value='Montenegro'>Montenegro</option><option value='Nicaragua'>Nicaragua</option>" +
+          "<option value='Burma (Myanmar)'>Burma (Myanmar)</option><option value='France'>France</option><option value='El Salvador'>El Salvador</option><option value='Greece'>Greece</option><option value='United States of America'>United States of America</option>" +
+          "<option value='Kosovo'>Kosovo</option><option value='Thailand'>Thailand</option><option value='Georgia'>Georgia</option><option  value='Ethiopia'>Ethiopia</option><option value='Armenia'>Armenia</option>" +
+          "<option value='Costa Rica'>Costa Rica</option><option value='Romania'>Romania</option><option value='Philippines'>Philippines</option><option value='Belize'>Belize</option><option value='Singapore'>Singapore</option>" +
+          "<option value='Israel'>Israel</option><option value='Panama'>Panama</option><option value='Japan'>Japan</option><option value='Laos'>Laos</option><option value='Hungary'>Hungary</option>" +
+          "<option value='South Korea'>South Korea</option><option value='The Seychelles'>The Seychelles</option><option value='Cyprus'>Cyprus</option><option value='Luxembourg'>Luxembourg</option><option value='Canada'>Canada</option>" +
+          "<option value='Tanzania'>Tanzania</option><option value='Iceland'>Iceland</option><option value='Jamaica'>Jamaica</option><option value='Slovakia'>Slovakia</option><option value='Norway'>Norway</option>" +
+          "<option value='Portugal'>Portugal</option><option value='Spain'>Spain</option><option value='Belgium'>Belgium</option><option value='Czech Republic'>Czech Republic</option><option value='Austria'>Austria</option>" +
+          "<option>Guatemala</option></select></div></div><hr/>" +
+          "<div class='form-group'><label class='control-label col-sm-2' for='type'>Food/ Restaurant Type:</label><div class='col-sm-10'><select class='form-control' id='restType' style='width:45%;' value='rest"+type+"' >" +
+          "<option value='Tea Restaurant'>Tea Restaurant</option><option value='Food Stall Noodles'>Food Stall Noodles</option><option value='Dai Pai Dong'>Dai Pai Dong</option><option value='Noodles/Rice Noodles'>Noodles/Rice Noodles</option><option value='Congee'>Congee</option>" +
+          "<option value='Wonton/Dumpling'>Wonton/Dumpling</option><option value='Fast Food'>Fast Food</option><option value='Cooked Food Center'>Cooked Food Center</option><option value='Snack Shop & Deli'>Snack Shop & Deli</option></select>" +
+          "</div></div><hr/>" +
+          "<div class='form-group'><button type='button' class='btn btn-primary' data-toggle='modal' style='width:45%;' id='edMenu' data-target='#"+getName+"Menu'>Edit Menu</button></div>" +
+         
+          "<button type='button' class='btn btn-success' id='saveRest' width='45%' data-dismiss='modal' style='align: right;'  onclick='updateSave()'>Save</button></form></div>" +
+          "</div></div></div>" +
+          "<table id='myTable' border='1'>"+
+        "</table>" +
+        "<div class='modal fade' id='"+getName+"Menu'><div class='modal-dialog modal-lg' style='width:80%'>"+
+          "<div class='modal-content'>"+
+            "<div class='modal-header'>"+
+              "<h4 class='modal-title'>Edit Menu</h4>" +
+          "<button type='button' class='close' data-dismiss='modal'>&times;</button>"+
+       " </div>"+
+        "<div class='modal-body'>"+
+          "<button type='button' id='addMenu"+getName+"' >Add Menu</button>"+
+          "<hr/>"+
+         " <table id='menuTable"+getName+"' width='100%' border='1'>"+
+            "<tr><th>Name</th><th>Type</th><th>Date</th><th>$</th><th>Status</th><th>Option</th></tr>"+
+          "</table>"+
+        "</div>"+
+          "<div class='modal-footer'><button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button></div></div></div></div>"
+          );
+
+          
+
+          $("#addMenu"+getName).click(function(){
+            var row = 0;
+          $("#menuTable"+getName).append("<tr id="+row+"><td><input type='text'></td><td><select><option>special</option><option>temporary</option><option>seasonal</option></select></td><td><input id='date' type='text' placefolder='dd-mm-yyyy'> to <input id='date2' type='text' placefolder='dd-mm-yyyy'></td><td><input type='text'></td><td><input type='checkbox' value='hide'>Hidden</td><td><button id='deleteMenu"+getName+"'>Delete Menu</button></td></tr>");
+          row = row + 1;
+        });
+        $("#menuTable"+getName).on('click', '#deleteMenu'+getName, function () {
+          $(this).closest('tr').remove();
+        }); 
+        $("#btnYes"+getName).click(function(){
+      $("#Form"+getName).hide();
+});
+
+    });
+    $("#btnYesMC").click(function(){
+      $("#FormMc").hide();
+});
+    $("#btnYesKFC").click(function(){
+      $("#FormKFC").hide();
+});
+    $("#btnYesMos").click(function(){
+      $("#FormMos").hide();
+});
+    $("#btnYesFair").click(function(){
+      $("#FormFair").hide();
+});
+});
+  </script>
+</head>
+<body>
+  <div class="background">
+    <nav class="navbar navbar-inverse" >
+      <div class="container-fluid" >
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><b>Food Yummy EveryWhere</b></a>
+        </div>
+        <ul class="nav navbar-nav">
+          
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+
+          <li id="logout"><a href="#"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+        </ul>
+    </nav>
+    
+      
+      <br />
+      <div class="table" align="center">
+        <div id="table">
+          <!-- Trigger the modal with a button -->
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addRest" >Add Restaurant</button>
+          
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
+              </ol>
+          
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner">
+          
+                <div class="item active">
+                  <img src="../photo/mcdonald.png" alt="MC Donald" style="width:100%;">
+                  <div class="carousel-caption">
+                    
+                  </div>
+                </div>
+          
+                <div class="item">
+                  <img src="../photo/kfc.png" alt="KFC" style="width:100%;">
+                  <div class="carousel-caption">
+                    
+                  </div>
+                </div>
+              
+                <div class="item">
+                  <img src="../photo/mosBurger.png" alt="Mos Burger" style="width:100%;">
+                  <div class="carousel-caption">
+                    </div>
+                  </div>
+                  <div class="item">
+                    <img src="../photo/fairwood.png" alt="Fair Wood" style="width:100%;">
+                    <div class="carousel-caption">
+                      
+                    </div>
+                </div>
+            
+              </div>
+          
+              <!-- Left and right controls -->
+              <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          
+          
+          <div id="showRest" >
+            <a data-toggle='modal' id='FormMc' data-target='#mc'><img src='../photo/mcdonald.png' style='width: 100px; height:100px;' hspace='20'></a>
+            <a data-toggle='modal' id='FormKFC' data-target='#kfc'><img src='../photo/kfc.png' style='width: 100px; height:100px;' hspace='20'></a>
+            <a data-toggle='modal' id='FormMos' data-target='#mos'><img src='../photo/mosBurger.png' style='width: 100px; height:100px;' hspace='20'></a>
+            <a data-toggle='modal' id='FormFair' data-target='#fair'><img src='../photo/fairwood.png' style='width: 100px; height:100px;' hspace='20'></a>
+
+          </div>
+          <div id="showForm">
+            <div class='modal fade' id='mc' role='dialog'><div class='modal-dialog modal-lg'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'>&times;</button>
+            <h2 class='modal-title'>Edit Restaurant </h2></div>
+            <div class='modal-body'><form class='form-horizontal' id='editRestaurant'><div class='form-group' align='center'>
+            <button type='button' class='btn btn-danger' data-toggle="modal" style='width: 45%;' data-target="#deleteMC" >Delete</button>
+
+
+            <div class="modal fade" id="deleteMC" role="dialog" style="width: auto;">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Resturant Form</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Are you sure want to delete the Resturant Form?</p>
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-success" data-dismiss="modal" id="btnYesMC">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            </div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' >Restaurant Name:</label><div class='col-sm-10'>
+            <input type='text' class='form-control' style='width:50%;' id='editN' placeholder='Enter Name' value="MC Donald" ></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='branches'>Branches:</label><div class='col-sm-10'>
+            <select class='form-control' id='editBr' style='width:45%;'  ><option value="Mount Davis">Mount Davis</option><option value="Kennedy Town">Kennedy Town</option>
+            <option value="Pok Fu Lam">Pok Fu Lam</option><option value="Western District">Western District</option><option value="Mid Levels">Mid Levels</option><option value="Peak">Peak</option><option value="Sai Ying Pun">Sai Ying Pun</option><option value="Central">Central</option><option value="Wan Chai">Wan Chai</option>
+            <option value="Happy Valley">Happy Valley</option><option value="Causeway Bay">Causeway Bay</option><option value="North Point">North Point</option><option value="Quarry Bay">Quarry Bay</option><option value="Sau Kei Wan">Sau Kei Wan</option>
+            <option value="Chai Wan">Chai Wan</option><option value="Stonecutters Island">Stonecutters Island</option><option value="Lai Chi Kok">Lai Chi Kok</option><option value="Cheung Sha Wan">Cheung Sha Wan</option><option value="North Cheung Sha Wan">North Cheung Sha Wan</option>
+            <option value="Sham Shui Po">Sham Shui Po</option><option value="Mong Kok">Mong Kok</option><option value="Shek Kip Mei">Shek Kip Mei</option><option value="Yau Ma Tei">Yau Ma Tei</option><option value="Tsim Sha Tsui">Tsim Sha Tsui</option>
+            <option value="King's Park">King's Park</option><option value="Ho Man Tin">Ho Man Tin</option><option value="Kowloon Tong">Kowloon Tong</option><option value="Hung Hom">Hung Hom</option><option value="Ma Tau Kok">Ma Tau Kok</option>
+            <option value="Wong Tai Sin">Wong Tai Sin</option><option value="Kowloon City">Kowloon City</option><option value="Hong Kong Airport (Kai Tak)">Hong Kong Airport (Kai Tak)</option><option value="San Po Kong">San Po Kong</option><option value="Jordan Valley">Jordan Valley</option>
+            <option value="Ngau Tau Kok">Ngau Tau Kok</option><option value="Kwun Tong">Kwun Tong</option><option value="Yau Tong">Yau Tong</option><option value="Lei Yue Mun">Lei Yue Mun</option><option value="Diamond Hill (Area)">Diamond Hill (Area)</option>
+            <option value="Ngau Chi Wan (Area)">Ngau Chi Wan (Area)</option><option value="Lung Cheung Road (Area)">Lung Cheung Road (Area)</option><option value="Tsuen Wan">Tsuen Wan</option><option value="Sha Tin" selected>Sha Tin</option><option value="Tai Po">Tai Po</option>
+            <option value="Tuen Mun">Tuen Mun</option><option value="Sai Kung">Sai Kung</option><option value="Sheung Shui">Sheung Shui</option><option value="Fan Ling">Fan Ling</option><option value="Sha Tau Kok">Sha Tau Kok</option>
+            <option>Ta Kwu Ling</option></select></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' >Open Date:</label><div class='col-sm-10'><textarea class='form-control' rows='5' id='Date' placeholder='Enter Open Date'  >Monday - Sunday: 24hours</textarea></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Address:</label><div class='col-sm-10'><textarea class='form-control' rows='5' id='editAddress' placeholder='Enter Address' >Shop Nos. 245-247, 2/F, Wo Che Shopping Centre, Wo Che Estate, Tak Hau Street, Shatin, N.T.</textarea></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Telephone:</label><div class='col-sm-10'><input type='text' class='form-control' style='width:50%;' id='Phone' placeholder='Enter Telephone Number'  value="26998365"></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Dishes:</label><div class='col-sm-10'><select class='form-control' id='dish' style='width:45%;'  >
+            <option value="Vietnam">Vietnam</option><option value="Serbia">Serbia</option><option value="Jordan">Jordan</option><option value="Mexico">Mexico</option><option value="Italy">Italy</option>
+            <option value="Hong Kong Style">Hong Kong Style</option><option value="Mexico">Mexico</option><option value="Taiwan">Taiwan</option><option value="Montenegro">Montenegro</option><option value="Nicaragua">Nicaragua</option>
+            <option value="Burma (Myanmar)">Burma (Myanmar)</option><option value="France">France</option><option value="El Salvador">El Salvador</option><option value="Greece">Greece</option><option value="United States of America" selected>United States of America</option>
+            <option value="Kosovo">Kosovo</option><option value="Thailand">Thailand</option><option value="Georgia">Georgia</option><option value="Ethiopia">Ethiopia</option><option value="Armenia">Armenia</option>
+            <option value="Costa Rica">Costa Rica</option><option value="Romania">Romania</option><option value="Philippines">Philippines</option><option value="Belize">Belize</option><option value="Singapore">Singapore</option>
+            <option value="Israel">Israel</option><option value="Panama">Panama</option><option value="Japan">Japan</option><option value="Laos">Laos</option><option value="Hungary">Hungary</option>
+            <option value="South Korea">South Korea</option><option value="The Seychelles">The Seychelles</option><option value="Cyprus">Cyprus</option><option value="Luxembourg">Luxembourg</option><option value="Canada">Canada</option>
+            <option value="Tanzania">Tanzania</option><option value="Iceland">Iceland</option><option value="Jamaica">Jamaica</option><option value="Slovakia">Slovakia</option><option value="Norway">Norway</option>
+            <option value="Portugal">Portugal</option><option value="Spain">Spain</option><option value="Belgium">Belgium</option><option value="Czech Republic">Czech Republic</option><option value="Austria">Austria</option>
+            <option value="Guatemala">Guatemala</option></select></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Food/ Restaurant Type:</label><div class='col-sm-10'><select class='form-control' id='type' style='width:45%;' value='"+tb.type[i]+"' >
+            <option value="Tea Restaurant">Tea Restaurant</option><option value="Food Stall Noodles">Food Stall Noodles</option><option value="Dai Pai Dong">Dai Pai Dong</option><option value="Noodles/Rice Noodles">Noodles/Rice Noodles</option><option value="Congee">Congee</option>
+            <option value="Wonton/Dumpling">Wonton/Dumpling</option><option value="Fast Food" selected>Fast Food</option><option value="Cooked Food Center">Cooked Food Center</option><option value="Snack Shop & Deli">Snack Shop & Deli</option></select>
+            </div></div><hr/><hr/><div class='form-group'><button type='button' class='btn btn-primary' data-toggle='modal' style='width:45%;' data-target='#editMenuMC'>Edit Menu</button>
+            </div>
+            <button type='button' class='btn btn-success' id='save' width='45%' data-dismiss='modal'  onclick='updateSave()'>Save</button></form></div>
+            </div></div>
+        </div>
+        <table id="myTable" border="1">
+        </table>
+        <div class='modal fade' id='editMenuMC'><div class='modal-dialog modal-lg' style='width:80%'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <h4 class='modal-title'>Edit Menu</h4>
+          <button type='button' class='close' data-dismiss='modal'>&times;</button>
+        </div>
+        <div class='modal-body'>
+          <button type='button' id='addMenuMC' >Add Menu</button>
+          <hr/>
+          <table id='menuTableMC' width='100%' border='1'>
+            <tr><th>Name</th><th>Type</th><th>Date</th><th>$</th><th>Status</th><th>Option</th></tr>
+          </table>
+        </div>
+          <div class='modal-footer'><button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button></div></div></div></div>
+
+          
+            <div class='modal fade' id='kfc' role='dialog'><div class='modal-dialog modal-lg'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'>&times;</button>
+            <h2 class='modal-title'>Edit Restaurant </h2></div>
+            <div class='modal-body'><form class='form-horizontal' id='editRestaurant'><div class='form-group' align='center'>
+              <button type='button' class='btn btn-danger' data-toggle="modal" style='width: 45%;' data-target="#deleteKFC" >Delete</button>
+
+            <div class="modal fade" id="deleteKFC" role="dialog" style="width: auto;">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Resturant Form</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Are you sure want to delete the Resturant Form?</p>
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-success" data-dismiss="modal" id="btnYesKFC">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            </div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' >Restaurant Name:</label><div class='col-sm-10'>
+            <input type='text' class='form-control' style='width:50%;' id='editN' placeholder='Enter Name'  value="KFC"></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='branches'>Branches:</label><div class='col-sm-10'>
+            <select class='form-control' id='editBr' style='width:45%;'  ><option>Mount Davis</option><option>Kennedy Town</option>
+            <option>Pok Fu Lam</option><option>Western District</option><option>Mid Levels</option><option>Peak</option><option>Sai Ying Pun</option><option>Central</option><option selected>Wan Chai</option>
+            <option>Happy Valley</option><option>Causeway Bay</option><option>North Point</option><option>Quarry Bay</option><option>Sau Kei Wan</option>
+            <option>Chai Wan</option><option>Stonecutters Island</option><option>Lai Chi Kok</option><option>Cheung Sha Wan</option><option>North Cheung Sha Wan</option>
+            <option>Sham Shui Po</option><option>Mong Kok</option><option>Shek Kip Mei</option><option>Yau Ma Tei</option><option>Tsim Sha Tsui</option>
+            <option>King's Park</option><option>Ho Man Tin</option><option>Kowloon Tong</option><option>Hung Hom</option><option>Ma Tau Kok</option>
+            <option>Wong Tai Sin</option><option>Kowloon City</option><option>Hong Kong Airport (Kai Tak)</option><option>San Po Kong</option><option>Jordan Valley</option>
+            <option>Ngau Tau Kok</option><option>Kwun Tong</option><option>Yau Tong</option><option>Lei Yue Mun</option><option>Diamond Hill (Area)</option>
+            <option>Ngau Chi Wan (Area)</option><option>Lung Cheung Road (Area)</option><option>Tsuen Wan</option><option>Sha Tin</option><option>Tai Po</option>
+            <option>Tuen Mun</option><option>Sai Kung</option><option>Sheung Shui</option><option>Fan Ling</option><option>Sha Tau Kok</option>
+            <option>Ta Kwu Ling</option></select></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' >Open Date:</label><div class='col-sm-10'><textarea class='form-control' rows='5' id='Date' placeholder='Enter Open Date'  >07:00~18:00 (Mon-Fri), 07:00~16:00 (Sat), Closed (Sun & Public Holiday)</textarea></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Address:</label><div class='col-sm-10'><textarea class='form-control' rows='5' id='editAddress' placeholder='Enter Address' >B/M & G/F (Portions), Kwong Sang Hong Building, 298 Hennessy Road, Wan Chai, Hong Kong</textarea></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Telephone:</label><div class='col-sm-10'><input type='text' class='form-control' style='width:50%;' id='Phone' placeholder='Enter Telephone Number'  value="28329063"></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Dishes:</label><div class='col-sm-10'><select class='form-control' id='dish' style='width:45%;'  >
+            <option>Vietnam</option><option>Serbia</option><option>Jordan</option><option>Mexico</option><option>Italy</option>
+            <option>Hong Kong Style</option><option>Mexico</option><option>Taiwan</option><option>Montenegro</option><option>Nicaragua</option>
+            <option>Burma (Myanmar)</option><option>France</option><option>El Salvador</option><option>Greece</option><option selected>United States of America</option>
+            <option>Kosovo</option><option>Thailand</option><option>Georgia</option><option>Ethiopia</option><option>Armenia</option>
+            <option>Costa Rica</option><option>Romania</option><option>Philippines</option><option>Belize</option><option>Singapore</option>
+            <option>Israel</option><option>Panama</option><option>Japan</option><option>Laos</option><option>Hungary</option>
+            <option>South Korea</option><option>The Seychelles</option><option>Cyprus</option><option>Luxembourg</option><option>Canada</option>
+            <option>Tanzania</option><option>Iceland</option><option>Jamaica</option><option>Slovakia</option><option>Norway</option>
+            <option>Portugal</option><option>Spain</option><option>Belgium</option><option>Czech Republic</option><option>Austria</option>
+            <option>Guatemala</option></select></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Food/ Restaurant Type:</label><div class='col-sm-10'><select class='form-control' id='type' style='width:45%;' value='"+tb.type[i]+"' >
+            <option>Tea Restaurant</option><option>Food Stall Noodles</option><option>Dai Pai Dong</option><option>Noodles/Rice Noodles</option><option>Congee</option>
+            <option>Wonton/Dumpling</option><option selected>Fast Food</option><option>Cooked Food Center</option><option>Snack Shop & Deli</option></select>
+            </div></div><hr/><hr/><div class='form-group'><button type='button' class='btn btn-primary' data-toggle='modal' style='width:45%;' data-target='#editMenuKfc'>Edit Menu</button>
+            </div>
+            <button type='button' class='btn btn-success' id='save' width='45%' data-dismiss='modal' onclick='updateSave()'>Save</button></form></div>
+            </div></div>
+        </div>
+        <table id="myTable" border="1">
+        </table>
+        <div class='modal fade' id='editMenuKfc'><div class='modal-dialog modal-lg' style='width:80%'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <h4 class='modal-title'>Edit Menu</h4>
+          <button type='button' class='close' data-dismiss='modal'>&times;</button>
+        </div>
+        <div class='modal-body'>
+          <button type='button' id='addMenuKfc' >Add Menu</button>
+          <hr/>
+          <table id='menuTableKfc' width='100%' border='1'>
+            <tr><th>Name</th><th>Type</th><th>Date</th><th>$</th><th>Status</th><th>Option</th></tr>
+          </table>
+        </div>
+          <div class='modal-footer'><button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button></div></div></div></div>
+
+
+
+
+
+          <div class='modal fade' id='mos' role='dialog'><div class='modal-dialog modal-lg'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'>&times;</button>
+            <h2 class='modal-title'>Edit Restaurant </h2></div>
+            <div class='modal-body'><form class='form-horizontal' id='editRestaurant'><div class='form-group' align='center'>
+            <button type='button' class='btn btn-danger' data-toggle="modal" style='width: 45%;' data-target="#deleteMos" >Delete</button>
+
+
+            <div class="modal fade" id="deleteMos" role="dialog" style="width: auto;">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Resturant Form</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Are you sure want to delete the Resturant Form?</p>
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-success" data-dismiss="modal" id="btnYesMos">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            </div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' >Restaurant Name:</label><div class='col-sm-10'>
+            <input type='text' class='form-control' style='width:50%;' id='editN' placeholder='Enter Name' value="Mos Burger" ></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='branches'>Branches:</label><div class='col-sm-10'>
+            <select class='form-control' id='editBr' style='width:45%;'  ><option value="Mount Davis">Mount Davis</option><option value="Kennedy Town">Kennedy Town</option>
+            <option value="Pok Fu Lam">Pok Fu Lam</option><option value="Western District">Western District</option><option value="Mid Levels">Mid Levels</option><option value="Peak">Peak</option><option value="Sai Ying Pun">Sai Ying Pun</option><option value="Central">Central</option><option value="Wan Chai">Wan Chai</option>
+            <option value="Happy Valley">Happy Valley</option><option value="Causeway Bay">Causeway Bay</option><option value="North Point">North Point</option><option value="Quarry Bay">Quarry Bay</option><option value="Sau Kei Wan">Sau Kei Wan</option>
+            <option value="Chai Wan">Chai Wan</option><option value="Stonecutters Island">Stonecutters Island</option><option value="Lai Chi Kok">Lai Chi Kok</option><option value="Cheung Sha Wan">Cheung Sha Wan</option><option value="North Cheung Sha Wan">North Cheung Sha Wan</option>
+            <option value="Sham Shui Po">Sham Shui Po</option><option value="Mong Kok">Mong Kok</option><option value="Shek Kip Mei">Shek Kip Mei</option><option value="Yau Ma Tei">Yau Ma Tei</option><option value="Tsim Sha Tsui">Tsim Sha Tsui</option>
+            <option value="King's Park">King's Park</option><option value="Ho Man Tin">Ho Man Tin</option><option value="Kowloon Tong">Kowloon Tong</option><option value="Hung Hom">Hung Hom</option><option value="Ma Tau Kok">Ma Tau Kok</option>
+            <option value="Wong Tai Sin">Wong Tai Sin</option><option value="Kowloon City">Kowloon City</option><option value="Hong Kong Airport (Kai Tak)">Hong Kong Airport (Kai Tak)</option><option value="San Po Kong">San Po Kong</option><option value="Jordan Valley">Jordan Valley</option>
+            <option value="Ngau Tau Kok">Ngau Tau Kok</option><option value="Kwun Tong">Kwun Tong</option><option value="Yau Tong">Yau Tong</option><option value="Lei Yue Mun">Lei Yue Mun</option><option value="Diamond Hill (Area)">Diamond Hill (Area)</option>
+            <option value="Ngau Chi Wan (Area)">Ngau Chi Wan (Area)</option><option value="Lung Cheung Road (Area)">Lung Cheung Road (Area)</option><option value="Tsuen Wan">Tsuen Wan</option><option value="Sha Tin">Sha Tin</option><option value="Tai Po">Tai Po</option>
+            <option value="Tuen Mun">Tuen Mun</option><option value="Sai Kung">Sai Kung</option><option value="Sheung Shui" selected>Sheung Shui</option><option value="Fan Ling">Fan Ling</option><option value="Sha Tau Kok">Sha Tau Kok</option>
+            <option>Ta Kwu Ling</option></select></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' >Open Date:</label><div class='col-sm-10'><textarea class='form-control' rows='5' id='Date' placeholder='Enter Open Date'  >Monday - Sunday: 8:00 ~ 22:00</textarea></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Address:</label><div class='col-sm-10'><textarea class='form-control' rows='5' id='editAddress' placeholder='Enter Address' >Shop 2033-2034, 2/F, Sheung Shui Centre, 3 Chi Cheong Road, Sheung Shui</textarea></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Telephone:</label><div class='col-sm-10'><input type='text' class='form-control' style='width:50%;' id='Phone' placeholder='Enter Telephone Number'  value="21482270"></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Dishes:</label><div class='col-sm-10'><select class='form-control' id='dish' style='width:45%;'  >
+            <option value="Vietnam">Vietnam</option><option value="Serbia">Serbia</option><option value="Jordan">Jordan</option><option value="Mexico">Mexico</option><option value="Italy">Italy</option>
+            <option value="Hong Kong Style">Hong Kong Style</option><option value="Mexico">Mexico</option><option value="Taiwan">Taiwan</option><option value="Montenegro">Montenegro</option><option value="Nicaragua">Nicaragua</option>
+            <option value="Burma (Myanmar)">Burma (Myanmar)</option><option value="France">France</option><option value="El Salvador">El Salvador</option><option value="Greece">Greece</option><option value="United States of America" selected>United States of America</option>
+            <option value="Kosovo">Kosovo</option><option value="Thailand">Thailand</option><option value="Georgia">Georgia</option><option value="Ethiopia">Ethiopia</option><option value="Armenia">Armenia</option>
+            <option value="Costa Rica">Costa Rica</option><option value="Romania">Romania</option><option value="Philippines">Philippines</option><option value="Belize">Belize</option><option value="Singapore">Singapore</option>
+            <option value="Israel">Israel</option><option value="Panama">Panama</option><option value="Japan">Japan</option><option value="Laos">Laos</option><option value="Hungary">Hungary</option>
+            <option value="South Korea">South Korea</option><option value="The Seychelles">The Seychelles</option><option value="Cyprus">Cyprus</option><option value="Luxembourg">Luxembourg</option><option value="Canada">Canada</option>
+            <option value="Tanzania">Tanzania</option><option value="Iceland">Iceland</option><option value="Jamaica">Jamaica</option><option value="Slovakia">Slovakia</option><option value="Norway">Norway</option>
+            <option value="Portugal">Portugal</option><option value="Spain">Spain</option><option value="Belgium">Belgium</option><option value="Czech Republic">Czech Republic</option><option value="Austria">Austria</option>
+            <option value="Guatemala">Guatemala</option></select></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Food/ Restaurant Type:</label><div class='col-sm-10'><select class='form-control' id='type' style='width:45%;' value='"+tb.type[i]+"' >
+            <option value="Tea Restaurant">Tea Restaurant</option><option value="Food Stall Noodles">Food Stall Noodles</option><option value="Dai Pai Dong">Dai Pai Dong</option><option value="Noodles/Rice Noodles">Noodles/Rice Noodles</option><option value="Congee">Congee</option>
+            <option value="Wonton/Dumpling">Wonton/Dumpling</option><option value="Fast Food" selected>Fast Food</option><option value="Cooked Food Center">Cooked Food Center</option><option value="Snack Shop & Deli">Snack Shop & Deli</option></select>
+            </div></div><hr/><hr/><div class='form-group'><button type='button' class='btn btn-primary' data-toggle='modal' style='width:45%;' data-target='#editMenuMos'>Edit Menu</button>
+            </div>
+            <button type='button' class='btn btn-success' id='save' width='45%' data-dismiss='modal'  onclick='updateSave()'>Save</button></form></div>
+            </div></div>
+        </div>
+        <table id="myTable" border="1">
+        </table>
+        <div class='modal fade' id='editMenuMos'><div class='modal-dialog modal-lg' style='width:80%'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <h4 class='modal-title'>Edit Menu</h4>
+          <button type='button' class='close' data-dismiss='modal'>&times;</button>
+        </div>
+        <div class='modal-body'>
+          <button type='button' id='addMenuMos' >Add Menu</button>
+          <hr/>
+          <table id='menuTableMos' width='100%' border='1'>
+            <tr><th>Name</th><th>Type</th><th>Date</th><th>$</th><th>Status</th><th>Option</th></tr>
+          </table>
+        </div>
+          <div class='modal-footer'><button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button></div></div></div></div>
+
+
+
+
+
+
+
+          <div class='modal fade' id='fair' role='dialog'><div class='modal-dialog modal-lg'><div class='modal-content'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'>&times;</button>
+            <h2 class='modal-title'>Edit Restaurant </h2></div>
+            <div class='modal-body'><form class='form-horizontal' id='editRestaurant'><div class='form-group' align='center'>
+            <button type='button' class='btn btn-danger' data-toggle="modal" style='width: 45%;' data-target="#deleteFair" >Delete</button>
+
+
+            <div class="modal fade" id="deleteFair" role="dialog" style="width: auto;">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Resturant Form</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Are you sure want to delete the Resturant Form?</p>
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-success" data-dismiss="modal" id="btnYesFair">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            </div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' >Restaurant Name:</label><div class='col-sm-10'>
+            <input type='text' class='form-control' style='width:50%;' id='editN' placeholder='Enter Name' value="Fair Wood" ></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='branches'>Branches:</label><div class='col-sm-10'>
+            <select class='form-control' id='editBr' style='width:45%;'  ><option value="Mount Davis">Mount Davis</option><option value="Kennedy Town">Kennedy Town</option>
+            <option value="Pok Fu Lam">Pok Fu Lam</option><option value="Western District">Western District</option><option value="Mid Levels">Mid Levels</option><option value="Peak">Peak</option><option value="Sai Ying Pun">Sai Ying Pun</option><option value="Central">Central</option><option value="Wan Chai">Wan Chai</option>
+            <option value="Happy Valley">Happy Valley</option><option value="Causeway Bay">Causeway Bay</option><option value="North Point">North Point</option><option value="Quarry Bay">Quarry Bay</option><option value="Sau Kei Wan">Sau Kei Wan</option>
+            <option value="Chai Wan">Chai Wan</option><option value="Stonecutters Island">Stonecutters Island</option><option value="Lai Chi Kok">Lai Chi Kok</option><option value="Cheung Sha Wan">Cheung Sha Wan</option><option value="North Cheung Sha Wan">North Cheung Sha Wan</option>
+            <option value="Sham Shui Po">Sham Shui Po</option><option value="Mong Kok">Mong Kok</option><option value="Shek Kip Mei">Shek Kip Mei</option><option value="Yau Ma Tei">Yau Ma Tei</option><option value="Tsim Sha Tsui">Tsim Sha Tsui</option>
+            <option value="King's Park">King's Park</option><option value="Ho Man Tin">Ho Man Tin</option><option value="Kowloon Tong">Kowloon Tong</option><option value="Hung Hom">Hung Hom</option><option value="Ma Tau Kok">Ma Tau Kok</option>
+            <option value="Wong Tai Sin">Wong Tai Sin</option><option value="Kowloon City">Kowloon City</option><option value="Hong Kong Airport (Kai Tak)">Hong Kong Airport (Kai Tak)</option><option value="San Po Kong">San Po Kong</option><option value="Jordan Valley">Jordan Valley</option>
+            <option value="Ngau Tau Kok">Ngau Tau Kok</option><option value="Kwun Tong" selected>Kwun Tong</option><option value="Yau Tong">Yau Tong</option><option value="Lei Yue Mun">Lei Yue Mun</option><option value="Diamond Hill (Area)">Diamond Hill (Area)</option>
+            <option value="Ngau Chi Wan (Area)">Ngau Chi Wan (Area)</option><option value="Lung Cheung Road (Area)">Lung Cheung Road (Area)</option><option value="Tsuen Wan">Tsuen Wan</option><option value="Sha Tin">Sha Tin</option><option value="Tai Po">Tai Po</option>
+            <option value="Tuen Mun">Tuen Mun</option><option value="Sai Kung">Sai Kung</option><option value="Sheung Shui">Sheung Shui</option><option value="Fan Ling">Fan Ling</option><option value="Sha Tau Kok">Sha Tau Kok</option>
+            <option>Ta Kwu Ling</option></select></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' >Open Date:</label><div class='col-sm-10'><textarea class='form-control' rows='5' id='Date' placeholder='Enter Open Date'  >07:00~18:00 (Mon-Fri), 07:00~16:00 (Sat), Closed (Sun & Public Holiday)</textarea></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Address:</label><div class='col-sm-10'><textarea class='form-control' rows='5' id='editAddress' placeholder='Enter Address' >Shop No. 1, 1/F, Millennium City 6, No. 392 Kwun Tong Road, Kwun Tong, Kowloon</textarea></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Telephone:</label><div class='col-sm-10'><input type='text' class='form-control' style='width:50%;' id='Phone' placeholder='Enter Telephone Number'  value="28568663"></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Dishes:</label><div class='col-sm-10'><select class='form-control' id='dish' style='width:45%;'  >
+            <option value="Vietnam">Vietnam</option><option value="Serbia">Serbia</option><option value="Jordan">Jordan</option><option value="Mexico">Mexico</option><option value="Italy">Italy</option>
+            <option value="Hong Kong Style" selected>Hong Kong Style</option><option value="Mexico">Mexico</option><option value="Taiwan">Taiwan</option><option value="Montenegro">Montenegro</option><option value="Nicaragua">Nicaragua</option>
+            <option value="Burma (Myanmar)">Burma (Myanmar)</option><option value="France">France</option><option value="El Salvador">El Salvador</option><option value="Greece">Greece</option><option value="United States of America">United States of America</option>
+            <option value="Kosovo">Kosovo</option><option value="Thailand">Thailand</option><option value="Georgia">Georgia</option><option value="Ethiopia">Ethiopia</option><option value="Armenia">Armenia</option>
+            <option value="Costa Rica">Costa Rica</option><option value="Romania">Romania</option><option value="Philippines">Philippines</option><option value="Belize">Belize</option><option value="Singapore">Singapore</option>
+            <option value="Israel">Israel</option><option value="Panama">Panama</option><option value="Japan">Japan</option><option value="Laos">Laos</option><option value="Hungary">Hungary</option>
+            <option value="South Korea">South Korea</option><option value="The Seychelles">The Seychelles</option><option value="Cyprus">Cyprus</option><option value="Luxembourg">Luxembourg</option><option value="Canada">Canada</option>
+            <option value="Tanzania">Tanzania</option><option value="Iceland">Iceland</option><option value="Jamaica">Jamaica</option><option value="Slovakia">Slovakia</option><option value="Norway">Norway</option>
+            <option value="Portugal">Portugal</option><option value="Spain">Spain</option><option value="Belgium">Belgium</option><option value="Czech Republic">Czech Republic</option><option value="Austria">Austria</option>
+            <option value="Guatemala">Guatemala</option></select></div></div><hr/>
+            <div class='form-group'><label class='control-label col-sm-2' for='address'>Food/ Restaurant Type:</label><div class='col-sm-10'><select class='form-control' id='type' style='width:45%;' value='"+tb.type[i]+"' >
+            <option value="Tea Restaurant">Tea Restaurant</option><option value="Food Stall Noodles">Food Stall Noodles</option><option value="Dai Pai Dong">Dai Pai Dong</option><option value="Noodles/Rice Noodles">Noodles/Rice Noodles</option><option value="Congee">Congee</option>
+            <option value="Wonton/Dumpling">Wonton/Dumpling</option><option value="Fast Food" selected>Fast Food</option><option value="Cooked Food Center">Cooked Food Center</option><option value="Snack Shop & Deli">Snack Shop & Deli</option></select>
+            </div></div><hr/><hr/><div class='form-group'><button type='button' class='btn btn-primary' data-toggle='modal' style='width:45%;' data-target='#editMenuFair'>Edit Menu</button>
+            </div>
+            <button type='button' class='btn btn-success' id='save' width='45%' data-dismiss='modal'  onclick='updateSave()'>Save</button></form></div>
+            </div></div>
+        </div>
+        <table id="myTable" border="1">
+        </table>
+        <div class='modal fade' id='editMenuFair'><div class='modal-dialog modal-lg' style='width:80%'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <h4 class='modal-title'>Edit Menu</h4>
+          <button type='button' class='close' data-dismiss='modal'>&times;</button>
+        </div>
+        <div class='modal-body'>
+          <button type='button' id='addMenuFair' >Add Menu</button>
+          <hr/>
+          <table id='menuTableFair' width='100%' border='1'>
+            <tr><th>Name</th><th>Type</th><th>Date</th><th>$</th><th>Status</th><th>Option</th></tr>
+          </table>
+        </div>
+          <div class='modal-footer'><button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button></div></div></div></div>
+
+
+      
+
+          
+        </div>
+</div>
+          <!-- Modal -->
+          <div class="modal fade" id="addRest" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h2 class="modal-title">Add Restaurant </h2>
+                </div>
+                <div class="modal-body">
+                  <form class="form-horizontal" id="addRestaurant">
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">Restaurant Name:</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" style="width:50%;" id="name" placeholder="Enter Name">
+                      </div>
+                    </div>
+                    <hr />
+                    
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="photo">Upload Photo:</label>
+                      <input type="file" name="pic" accept="image/*" id="uploadPho">
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                      <button type="button" class="btn btn-success" style="width:45%;" id="addButton"
+                        data-dismiss="modal">Add Restaurant</button>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+            
+         
+
+         
+          
+      </div>
+      
+
+      
+   </div>
+   </div>
+   </body>
+</html>
