@@ -404,7 +404,7 @@
     </div>
 
 
-    <div class="modal fade" id="mcdm">
+    <div class="modal fade targetreserve" id="mcdm">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
 
@@ -420,7 +420,7 @@
                             <select class="form-control" id="sel1">
                                 <option selected="selected">Select Your Branch</option>
                                 <optgroup label="New Territories">
-                                <option>Shatin Centre, Shatin</option>
+                                <option value="1">Shatin Centre, Shatin</option>
                                 <option>Lee On Estate, Ma On Shan</option>
                                 </optgroup>
                                 <optgroup label="Kowloon">
@@ -440,8 +440,8 @@
                                    $("#restaurant-content").show();
                                 })
                             })
-                        </script>
-
+                    </script>
+                    <div class="tabbable">
                     <ul class="nav nav-tabs" id="tabContent">
                         <li class="active"><a href="#mcdinfo" data-toggle="tab">About Us</a></li>
                         <li><a href="#mcdmenupane" data-toggle="tab">Menu</a></li>
@@ -525,6 +525,7 @@
                                 </form>
 
                         </div>
+                    </div>
                     </div>
                 </div>
 
@@ -645,32 +646,6 @@
     
                     <!-- Modal body -->
                     <div class="modal-body" id="panelmodal">
-                        <!-- <div class="form-group">
-                                <select class="form-control" id="sel1">
-                                    <option selected="selected">Select Your Branch</option>
-                                    <optgroup label="New Territories">
-                                    <option>Shatin Centre, Shatin</option>
-                                    <option>Lee On Estate, Ma On Shan</option>
-                                    </optgroup>
-                                    <optgroup label="Kowloon">
-                                    <option> Kowloon City Plaza, Kowloon City</option>
-                                    <option>Peking Road, Tsim Sha Tsui</option>
-                                    </optgroup>
-                                    <optgroup label="HK Island">
-                                    <option>King's Road, North Point</option>
-                                    </optgroup>
-                                </select>
-                        </div>
-    
-                        <script>
-                                $(document).ready(function() {
-                                    $(".tab-content").hide();
-                                    $("#sel1").change(function(){
-                                       $(".tab-content").show();
-                                    })
-                                })
-                            </script>
-     -->
                         <ul class="nav nav-tabs" id="tabContent">
                             <li class="active"><a href="#panelreserves" data-toggle="tab">My Reservations</a></li>
                             <li><a href="#paneldetails" data-toggle="tab">My Details</a></li>
@@ -710,12 +685,14 @@
                                             <option>King's Road, North Point</option>
                                             </optgroup>
                                         </select>
-                                        <a href="#" id="addReserve" class="btn btn-primary">Add a Reservation</a>
+                                        <a href="#mcdm" data-target=".targetreserve" data-toggle="modal" id="addReserve" class="btn btn-primary" style="padding:7.5px">Add a Reservation</a>
                                 </div>
                                 <script>
                                     $(document).ready(function() {
                                         $("#addReserve").click(function(){
-                                            $("#panelm").hide();
+                                            $("#panelm").modal('hide');
+                                            $("#sel1").val('1');
+                                            $("#restaurant-content").show();
                                             $("#mcdm .modal-body .nav-tabs a:eq('3')").tab('show');
                                         })
                                     }) 
